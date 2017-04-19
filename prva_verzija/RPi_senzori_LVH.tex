@@ -22,7 +22,7 @@
 
 \section{Uvod}
 Ovaj će seminarski rad obraditi problematiku korištenja računala Raspberry Pi 3 za prikupljanje podataka sa senzora. Ukratko će se opisati sklopovska arhitektura računala Raspberry Pi 3 te pripadajuća programska podrška, uz nekoliko primjera korištenja. \\ \par
-Kao vrlo pristupačno malo računalo, Raspberry Pi je vrlo popularan kao ugradbeno računalo, a budući da ugradbena računala vrlo često za svoj rad koriste raznolike senzore, za ovaj će rad biti ključno razumjeti osnovne principe povezivanja senzora i računala, uzimajući u obzir sklopovski i programski aspekt. Shodno tome, bit će izložen kratak opis nekoliko akcelerometara, u funkciji senzora za mjerenje vibracija, i mikrofona, poglavito u funkciji senzora glasnoće. \\ \par
+Kao vrlo pristupačno malo računalo, Raspberry Pi je vrlo popularan kao ugradbeno računalo, a budući da ugradbena računala vrlo često za svoj rad koriste raznolike senzore, za ovaj će rad biti ključno razumjeti osnovne principe povezivanja senzora i računala, uzimajući u obzir sklopovski i programski aspekt. Shodno tome, bit će izložen kratak opis jednog akcelerometra, u funkciji senzora za mjerenje vibracija, te jednog mikrofona, poglavito u funkciji senzora glasnoće. \\ \par
 Ukratko će se opisati neke od dostupnih biblioteka i programskih okvira namijenjenih za rad sa senzorima, s naglaskom na već spomenute akcelerometre i mikrofone. Konačno, bit će pokazan i jednostavan primjer programskog koda za očitavanje podataka sa senzora uz prateći primjer vizualnog prikaza senzorskih podataka. \\
 \newpage
 
@@ -51,7 +51,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 
 		\par Taj je SoC spregnut s radnom memorijom s druge strane tiskane pločice. Riječ je o LPDDR2 SDRAM memoriji, s kapacitetom od 1 GB.
 
-		\par Za bežičnu je komunikaciju zadužen procesor osnovnog pojasa (engl. \textit{baseband processor}) BCM43438, također od tvrtke Broadcom, koji podržava WiFi i Bluetooth 4.1 protokole. Smješten je na stražnjoj strani pločice, a spregnut je s antenom na prednjoj strani.
+		\par Za bežičnu je komunikaciju zadužen procesor osnovnog pojasa (engl. \textit{baseband processor}) BCM43438, također od tvrtke Broadcom, koji podržava WiFi i Bluetooth 4.1 protokole. Smješten je na stražnjoj strani pločice, a spregnut je s antenom na prednjoj strani. Nije zgorega napomenuti da je Raspberry Pi 3 prva inačica ovog računala koja ima ugrađeno sklopovlje za bežičnu komunikaciju.
 
 		\par Konačno, SMSC LAN9514 (na slici uokviren plavom bojom) vrši funkciju USB čvora i Ethernet upravljača. Povezan je s procesorom jednom USB vezom, pa sa svakim od četiri USB priključka, te s Ethernet priključkom procesor komunicira preko te USB veze.
 
@@ -70,9 +70,11 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 			\item Poseban \textit{display} priključak
 		\end{itemize}
 
-		\par Od posebne su važnosti za ovaj rad GPIO pinovi. Oni, su, naime, ključni za komunikaciju sa senzorima koji će biti razmotreni kasnije u radu. Omogućuju najčešće korištene \textit{low-level} protokole za sklopovsku komunikaciju: I$^2$C, TTL i SPI. Naravno, sadrže i pinove za napajanje i uzemljenje sklopova, kao i pinove s ponašanjem definiranim od strane korisnika.
+		\par Od posebne su važnosti za ovaj rad GPIO pinovi. Oni, su, naime, ključni za komunikaciju sa senzorima koji će biti razmotreni kasnije u radu. Omogućuju najčešće korištene \textit{low-level} protokole za sklopovsku komunikaciju: I$^2$C, TTL i SPI. Naravno, sadrže i pinove za napajanje i uzemljenje sklopova, kao i pinove namijenjene za korisničku definiciju ponašanja.
 
 	\subsection{Programska podrška}
+		Programska je podrška za RPi3, baš kao i sklopovlje, izvedena s ciljem jednostavnosti i fleksibilnosti korištenja. Budući da nije riječ o mikrokontroleru (poput, primjerice, popularnog Arduina), već o potpuno opremljenom računalu, očito je da RPi3 mora imati neki operacijski sustav (u nastavku: OS). Ovdje kao najpopularniji OS za RPi u priču ulazi \textbf{Raspbian.} \\
+		\par Raspbian je besplatan i otvoren operacijski sustav baziran na distribuciji Linuxa zvanoj "Debian". Ono zbog čega je Raspbian toliko popularan i raširen jest činjenica da je taj OS optimiziran upravo za Raspberry Pi sklopovlje.\footnote{Ovo je očito i iz imena distribucije, koje je \textit{portmanteau} pojmova "Raspberry Pi" i "Debian".}
 	\subsection{Primjeri korištenja}
 \newpage
 % Riječ je, naime, o tzv. \textit{System-on-Chip} (SoC) računalu, pa je cijelo računalo veliko kao bankovna kartica. Iz navedenih se razloga Raspberry Pi računala najčešće susreću u dva konteksta:
