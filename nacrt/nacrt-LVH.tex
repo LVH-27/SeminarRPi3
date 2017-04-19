@@ -1,0 +1,67 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[croatian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[hyphens]{url}
+
+
+\usepackage[margin=2cm]{geometry}
+\usepackage[colorlinks=true,urlcolor=black]{hyperref}
+\pagenumbering{gobble}
+
+\begin{document}
+	\title{Očitavanje senzorskih podataka korištenjem računala Raspberry Pi 3}
+
+
+	\date{\vspace{-5ex} 14.03.2017.}
+	\maketitle
+
+Ovaj će seminarski rad obraditi problematiku korištenja računala Raspberry Pi 3 za prikupljanje podataka sa senzora. Ukratko će se opisati sklopovska arhitektura računala Raspberry Pi 3 te pripadajuća programska podrška, uz nekoliko primjera korištenja. \\ \par
+Kao vrlo pristupačno malo računalo, Raspberry Pi je vrlo popularan kao ugradbeno računalo, a budući da ugradbena računala vrlo često za svoj rad koriste raznolike senzore, za ovaj će rad biti ključno razumjeti osnovne principe povezivanja senzora i računala, uzimajući u obzir i sklopovski i programski aspekt. Shodno tome, bit će izložen kratak opis nekoliko akcelerometara, u funkciji senzora za mjerenje vibracija, i mikrofona, poglavito u funkciji senzora glasnoće. \\ \par
+Ukratko će se opisati neke od dostupnih biblioteka i programskih okvira namijenjenih za rad sa senzorima, s naglaskom na već spomenute akcelerometre i mikrofone. Konačno, bit će pokazan i jednostavan primjer programskog koda za očitavanje podataka sa senzora uz prateći primjer vizualnog prikaza senzorskih podataka. \\ \par
+
+\begin{enumerate}
+	\setlength{\itemsep}{1pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}
+
+	\item \textbf{\underline{Uvod}}
+	\item \textbf{\textbf{\underline{Raspberry Pi 3}}}
+	\begin{enumerate}
+		\item \textbf{Sklopovlje}
+		\item \textbf{Programska podrška}
+		\item \textbf{Primjeri korištenja}
+	\end{enumerate}
+	\item \textbf{\underline{Senzori}}
+	\begin{enumerate}
+		\item \textbf{Akcelerometri}
+		\begin{enumerate}
+			\item ADXL345
+			\item MMA8451
+			\item LIS3DH
+		\end{enumerate}
+		\item \textbf{Mikrofoni}
+		\begin{enumerate}
+			\item placeholder 1
+			\item placeholder 2
+		\end{enumerate}
+	\end{enumerate}
+	\item \textbf{\textbf{\underline{Pregled dostupnih programskih okvira}}}
+	\item \textbf{\underline{Primjeri}}
+	\begin{enumerate}
+		\item \textbf{Programski kôd}
+		\item \textbf{Pročitani podaci}
+	\end{enumerate}
+	\item \textbf{\underline{Zaključak}}
+	\item \textbf{\underline{Literatura}} \\
+\end{enumerate}
+
+\textbf{Literatura:}
+\begin{itemize}
+	\item Raspberry Pi službene stranice: \url{https://www.raspberrypi.org/}
+	\item ADXL345: \url{https://learn.adafruit.com/adxl345-digital-accelerometer}
+	\item MMA8451: \url{https://learn.adafruit.com/adafruit-mma8451-accelerometer-breakout/wiring-and-test?view=all}
+	\item LIS3DH: \url{https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout/downloads?view=all}
+	\item Zvučni senzori: \url{https://www.sunfounder.com/learn/sensor-kit-v2-0-for-raspberry-pi-b-plus/lesson-19-sound-sensor-sensor-kit-v2-0-for-b-plus.html}
+\end{itemize}
+\end{document}

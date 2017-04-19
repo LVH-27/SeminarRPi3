@@ -1,0 +1,26 @@
+﻿Čitanje senzorskih podataka korištenjem računala Raspberry Pi 3
+
+
+	Ovaj će seminarski rad obraditi problematiku korištenja računala Raspberry Pi 3 za prikupljanje podataka sa senzora. Prije svega, bit će ponuđen kratak opis Raspberry Pi 3 sklopovske arhitekture i pripadajuće programske podrške, uz nekoliko primjera korištenja.
+	Kao vrlo pristupačno malo računalo, Raspberry Pi je vrlo popularan kao ugradbeno računalo, a budući da ugradbena računala vrlo često za svoj rad koriste raznolike senzore, za ovaj će rad biti ključno razumjeti osnovne principe povezivanja senzora i računala - kako sklopovskog, tako i programskog. Shodno tome, bit će ponuđen kratak opis nekoliko akcelerometara, u funkciji senzora za mjerenje vibracija, i mikrofona, poglavito u funkciji senzora glasnoće.
+	Također, bit će ukratko opisane neke biblioteke i programski okviri namijenjeni za rad sa senzorima - jasno, s naglaskom na već spomenute akcelerometre i mikrofone. Konačno, bit će pokazan i jednostavan primjer programskog koda za očitanje podataka sa senzora, kao i ti očitani podaci.
+
+ 1 Uvod
+ 2 Raspberry Pi 3
+ 2.1  Sklopovlje
+ 2.2  Programska podrška
+ 2.3  Primjeri korištenja
+ 3 Senzori
+ 3.1  Akcelerometri
+ 3.1.1  ADXL345
+ 3.1.2  MMA8451
+ 3.1.3  LIS3DH
+ 3.2  Mikrofoni
+ 3.2.1  <placeholder 1>
+ 3.2.2  <placeholder 2>
+ 4 Pregled dostupnih programskih okvira
+ 5 Primjeri
+ 5.1  Programski kôd
+ 5.2  Očitani podaci
+ 6 Zaključak
+ 7 Literatura
