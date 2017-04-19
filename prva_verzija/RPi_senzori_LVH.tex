@@ -42,46 +42,63 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 		\paragraph{Glavni čipovi} % (fold)
 		\label{par:main_chips}
 		
-		% paragraph glavni_cipovi (end)
 		Glavne procesne jedinice nalaze se u čipu Broadcom BCM2837, koji je na slici označen crvenim pravokutnikom. Riječ je o tzv. \textit{System-on-Chip} (SoC) čipu koji sadrži:
 		\begin{itemize}
-			\item CPU - 64-bitni ARMv8 Cortex A53 s četiri jezgre na 1.2 GHz,
-			\item GPU - VideoCore IV na 400 MHz.
+			\item \textbf{CPU} - 64-bitni ARMv8 Cortex A53 s četiri jezgre na 1.2 GHz,
+			\item \textbf{GPU} - VideoCore IV na 400 MHz.
 		\end{itemize}
 
-		\par Taj je SoC spregnut s radnom memorijom s druge strane tiskane pločice. Riječ je o LPDDR2 SDRAM memoriji, s kapacitetom od 1 GB.
+		\par Taj je SoC spregnut s \textbf{radnom memorijom} s druge strane tiskane pločice. Riječ je o LPDDR2 SDRAM memoriji, s kapacitetom od 1 GB.
 
 		\par Za bežičnu je komunikaciju zadužen procesor osnovnog pojasa (engl. \textit{baseband processor}) BCM43438, također od tvrtke Broadcom, koji podržava WiFi i Bluetooth 4.1 protokole. Smješten je na stražnjoj strani pločice, a spregnut je s antenom na prednjoj strani. Nije zgorega napomenuti da je Raspberry Pi 3 prva inačica ovog računala koja ima ugrađeno sklopovlje za bežičnu komunikaciju.
 
 		\par Konačno, SMSC LAN9514 (na slici uokviren plavom bojom) vrši funkciju USB čvora i Ethernet upravljača. Povezan je s procesorom jednom USB vezom, pa sa svakim od četiri USB priključka, te s Ethernet priključkom procesor komunicira preko te USB veze.
+		% paragraph glavni_cipovi (end)
 
 		\paragraph{Ulazno-izlazni priključci} % (fold)
 		\label{par:IO_ports}
 		
-		% paragraph ulazno_izlazni_priključci (end)
 		Kao i svako drugo računalo, i RPi3 bi bio prilično beskoristan bez mogućnosti komunikacije s vanjskim svijetom. Naravno, na njemu postoji mnoštvo ulazno-izlaznih sučelja, a način na koji su ona izvedena je uvelike zaslužan za takvu popularnost ovog računala. Za ovaj seminar najvažniji priključci označeni su na Slici \ref{fig:rpi3}, a u nastavku je dan pregled tih sučelja:
 		\begin{itemize}
-			\item Četiri USB 2.0 priključka [narančasti pravokutnik],
-			\item Jedan Ethernet priključak [žuti pravokutnik],
-			\item Jedan microUSB priključak - samo za napajanje, ne i za komunikaciju [ljubičasti pravokutnik],
-			\item Četrdeset ulazno-izlaznih pinova opće namjene (GPIO - \textit{General Purpose Input/Output}) [zeleni pravokutnik],
+			\item Četiri \textbf{USB 2.0} priključka [narančasti pravokutnik]
+			\item Jedan \textbf{Ethernet} priključak [žuti pravokutnik]
+			\item Jedan \textbf{microUSB} priključak - samo za napajanje, ne i za komunikaciju [ljubičasti pravokutnik]
+			\item Četrdeset ulazno-izlaznih pinova opće namjene (\textbf{GPIO} - \textit{General Purpose Input/Output}) [zeleni pravokutnik]
+			\item Ulaz za \textbf{\textit{microSD} karticu} (s druge strane pločice)
 			\item Audio priključak i HDMI izlaz
 			\item Poseban priključak za službenu Raspberry Pi kameru
 			\item Poseban \textit{display} priključak
 		\end{itemize}
 
-		\par Od posebne su važnosti za ovaj rad GPIO pinovi. Oni, su, naime, ključni za komunikaciju sa senzorima koji će biti razmotreni kasnije u radu. Omogućuju najčešće korištene \textit{low-level} protokole za sklopovsku komunikaciju: I$^2$C, TTL i SPI. Naravno, sadrže i pinove za napajanje i uzemljenje sklopova, kao i pinove namijenjene za korisničku definiciju ponašanja.
+		\par Od posebne su važnosti za ovaj rad GPIO pinovi. Oni, su, naime, ključni za komunikaciju sa senzorima koji će biti razmotreni kasnije u radu. Omogućuju najčešće korištene \textit{low-level} protokole za sklopovsku komunikaciju: \textbf{I$^2$C, TTL i SPI.} Naravno, sadrže i pinove za napajanje i uzemljenje sklopova, kao i pinove namijenjene za korisničku definiciju ponašanja.
+		% paragraph ulazno_izlazni_priključci (end)
 
 	\subsection{Programska podrška}
-		Programska je podrška za RPi3, baš kao i sklopovlje, izvedena s ciljem jednostavnosti i fleksibilnosti korištenja. Budući da nije riječ o mikrokontroleru (poput, primjerice, popularnog Arduina), već o potpuno opremljenom računalu, očito je da RPi3 mora imati neki operacijski sustav (u nastavku: OS). Ovdje kao najpopularniji OS za RPi u priču ulazi \textbf{Raspbian.} \\
-		\par Raspbian je besplatan i otvoren operacijski sustav baziran na distribuciji Linuxa zvanoj "Debian". Ono zbog čega je Raspbian toliko popularan i raširen jest činjenica da je taj OS optimiziran upravo za Raspberry Pi sklopovlje.\footnote{Ovo je očito i iz imena distribucije, koje je \textit{portmanteau} pojmova "Raspberry Pi" i "Debian".}
+		Programska je podrška za RPi3, baš kao i sklopovlje, izvedena s ciljem jednostavnosti i fleksibilnosti korištenja. Budući da nije riječ o mikrokontroleru (poput, primjerice, popularnog Arduina), već o potpuno opremljenom računalu, očito je da RPi3 mora imati neki operacijski sustav (u nastavku: OS). On se u glavnini slučajeva nalazi na \textbf{\textit{microSD} kartici}, koja ima ulogu sekundarne memorije.\footnote{Moguće je pokrenuti OS i s, primjerice, nekog USB tvrdog diska, ali to nadilazi temu ovog seminara.} Ovdje kao najpopularniji OS za RPi u priču ulazi \textbf{Raspbian.} \\
+
+		\par Raspbian je besplatan i otvoren operacijski sustav baziran na distribuciji Linuxa zvanoj "Debian". Ono zbog čega je Raspbian toliko popularan jest činjenica da je taj \textbf{OS optimiziran upravo za Raspberry Pi sklopovlje.}\footnote{Ovo se može zaključiti i iz imena distribucije, koje je \textit{portmanteau} pojmova "Raspberry Pi" i "Debian".} Drugim riječima, Raspbian je distribucija Linuxa koja:
+		\begin{itemize}
+			\item je vrlo jednostavna za instalaciju i dolazi potpuno opremljena za normalan računalni rad - uključujući i \textbf{grafičko korisničko sučelje} (\textit{GUI - Graphical User Interface}) 
+			\item dolazi s već instaliranom programskom podrškom za komunikaciju sa specijaliziranim sklopovljem (poput GPIO pinova) - primjerice, \textbf{iz terminala, C-a ili Pythona.}
+		\end{itemize}
+
+
 	\subsection{Primjeri korištenja}
+	Uzevši u obzir ranije spomenute prednosti RPi3 računala - cijena, pristupačnost i dimenzije - RPi računala najčešće nađu svoju primjenu u dva konteksta:
+	\begin{itemize}
+		\item u edukativnim projektima (pristupačnost i cijena)
+		\item u ugradbenim sustavima (male dimenzije i cijena)
+	\end{itemize}
+	U nastavku su ukratko izložena dva primjera korištenja RPi3 računala. csvasdbasdgasdg VPN sadgasdgdasga podmornica sdhadhasdhgdash NFC
+	\\
+	\paragraph{Pametna brava} % (fold)
+	\label{par:smart_lock}
+		Pametne su brave koncept novijeg datuma, a označavaju autorizaciju ulaza osobe u neki prostor.
+
+	% paragraph glavni_cipovi (end)
+
 \newpage
-% Riječ je, naime, o tzv. \textit{System-on-Chip} (SoC) računalu, pa je cijelo računalo veliko kao bankovna kartica. Iz navedenih se razloga Raspberry Pi računala najčešće susreću u dva konteksta:
-%\begin{itemize}
-%	\item u edukativnim projektima (pristupačnost i cijena)
-%	\item u ugradbenim sustavima (male dimenzije i cijena)
-%\end{itemize}
+
 
 \section{Senzori}
 	\subsection{Akcelerometri}
