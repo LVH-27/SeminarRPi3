@@ -39,7 +39,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 \end{figure}
 
 	\subsection{Sklopovlje}
-		\paragraph{Glavni čipovi} % (fold)
+		\paragraph{\underline{Glavni čipovi}} % (fold)
 		\label{par:main_chips}
 		
 		Glavne procesne jedinice nalaze se u čipu Broadcom BCM2837, koji je na slici označen crvenim pravokutnikom. Riječ je o tzv. \textit{System-on-Chip} (SoC) čipu koji sadrži:
@@ -55,7 +55,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 		\par Konačno, SMSC LAN9514 (na slici uokviren plavom bojom) vrši funkciju USB čvora i Ethernet upravljača. Povezan je s procesorom jednom USB vezom, pa sa svakim od četiri USB priključka, te s Ethernet priključkom procesor komunicira preko te USB veze.
 		% paragraph glavni_cipovi (end)
 
-		\paragraph{Ulazno-izlazni priključci} % (fold)
+		\paragraph{\underline{Ulazno-izlazni priključci}} % (fold)
 		\label{par:IO_ports}
 		
 		Kao i svako drugo računalo, i RPi3 bi bio prilično beskoristan bez mogućnosti komunikacije s vanjskim svijetom. Naravno, na njemu postoji mnoštvo ulazno-izlaznih sučelja, a način na koji su ona izvedena je uvelike zaslužan za takvu popularnost ovog računala. Za ovaj seminar najvažniji priključci označeni su na Slici \ref{fig:rpi3}, a u nastavku je dan pregled tih sučelja:
@@ -91,14 +91,14 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 	\end{itemize}
 	U nastavku su ukratko izložena dva primjera korištenja RPi3 računala. Primjeri su relativno jednostavni, ali dobro ilustriraju moguće koncepte korištenja tog računala.
 	\\
-	\paragraph{Pametna brava} % (fold)
+	\paragraph{\underline{Pametna brava}} % (fold)
 	\label{par:smart_lock}
 		Pametne su brave koncept novijeg datuma, a označavaju autorizaciju ulaza osobe u neki prostor, i to ne koristeći (samo) klasični, mehanički ključ, nego korištenje kartica, lozinki, ili čak primjerice, prepoznavanja lica. Za implementaciju jedne takve brave može poslužiti bilo kakav mikrokontroler, i RPi3 bi svakako bio pretjeran za tako jednostavan zadatak, ali ono što bi moglo umanjiti taj \textit{overhead} jest, primjerice, praćenje pristupa prostoru pomoću logova, udaljeno upravljanje bravom, ili agregiranje više neovisnih zadataka slične složenosti na jednom RPi-ju.
 		\par Računarska sekcija Kluba studenata elektrotehnike konkretno koristi Raspberry Pi 3 za agregiranje informacija o radu nekoliko servera, a u planu je spajanje NFC čitača (\textit{Near-Field Communication} - tehnologija beskontaktne komunikacije korištena u studentskim iskaznicama i bankovnim karticama) na taj isti RPi3, kako bi se na taj način autenticiralo osobe koje žele ući u sekciju.
 
 	% paragraph smart_lock (end)
 
-	\paragraph{Kućni VPN i WiFi pristupna točka} % (fold)
+	\paragraph{\underline{Kućni VPN i WiFi pristupna točka}} % (fold)
 	\label{par:home_vpn}
 		U kontekstu komunikacijskih mreža, VPN (\textit{Virtual Private Network}) je protokol spajanja na mrežu koji omogućuje virtualno pristupanje mreži s drugog mjesta i prosljeđivanje svòg lokalnog prometa kroz taj "tunel" na način koji osigurava privatnost i sigurnost, kao i (do neke mjere) svojstva mreže (dozvole i zabrane, primjerice, ili simulacija lokalnog pristupa) kakva su na udaljenoj mreži na koju je korisnik VPN-om spojen. Implementacijski detalji VPN-a nipošto nisu trivijalni, i neće se dalje razmatrati u ovom radu, ali takav se sustav relativno bezbolno može upogoniti upravo koristeći Raspberry Pi, umjesto da se (samo?) za taj zadatak koristi neko (red veličine skuplje) računalo opće namjene.
 		\par Još jedna zanimljiva mogućnost koju pruža RPi3 (ali ne i ranije inačice - barem ne bez dodatnog sklopovlja) jest postavljanje pristupne točke za WiFi, koja bi bežični promet prosljeđivala žičnoj Ethernet vezi. Tako se može, u nedostatku kompletnijeg i trajnijeg rješenja, ostvariti \textit{ad hoc} bežična mreža ili pojačivač signala.
@@ -112,20 +112,63 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 	Sada kada je definirano računalo koje će agregirati i analizirati očitanja senzora koje ćemo koristiti, vrijeme je da i o njima nešto rečemo. Slučaj koji promatramo jest \textbf{mjerenje vibracija} na mirnim površinama poput vrata, sa svrhom utvrđivanja \textbf{izvora} vibracija. Shodno tome, slijede kratki pregledi jednog akcelerometra - senzora za mjerenje relativnog ubrzanja - te jednog senzora glasnoće.
 	Ipak, prije toga, radi lakšeg razumijevanja slijedi vrlo kratki opis dva ranije spomenuta \textit{low-level} komunikacijska protokola.
 
-	\paragraph{I$^2$C} % (fold)
+	\subsection{Komunikacijski protokoli}
+	\paragraph{\underline{I$^2$C}} % (fold)
 	\label{par:i2c}
-
+		I$^2$C (engl. \textit{Inter-Integrated Circuit}) komunikacija je protokol za sinkronu serijsku komunikaciju. Odlikuje ga iznimna jednostavnost korištenja - za upogoniti I$^2$C komunikaciju potrebne su samo dva pina:
+		\begin{itemize} 
+			\item \textbf{SDA} (\textit{Serial DAta line}) - podatkovna linija
+			\item \textbf{SCL} (\textit{Serial CLock}) - linija sa signalom takta, za sinkronizaciju.
+		\end{itemize}
+		Protokol omogućuje spajanje više uređaja s I$^2$C mogućnosti na istu sabirnicu, što znači da postoji i koncept adresiranja, kao i \textit{master-slave} arhitekture. Detalji implementacije toga su preširoki za ova rad, ali ukratko - svaki I$^2$C uređaj mora imati svoju, na sabirnici jedinstvenu adresu, koja se obično sastoji od dvije heksadekadske znamenke. 
+		Ono što je jednostavnost uporabe žrtvovala jest mogućnost istovremene dvosmjerne (engl. \textit{full duplex}) komunikacije - budući da postoji samo jedna podatkovna linija, očito je da je to nemoguće, već je moguća samo \textbf{naizmjenična dvosmjerna (engl. \textit{half duplex})} komunikacija.
 	% paragraph i2c (end)
 
+	\paragraph{\underline{SPI}} % (fold)
+	\label{par:spi}
+		SPI (\textit{Serial Peripheral Interface}) je također protokol za sinkronu serijsku komunikaciju, ali nešto drugačije koncipiran (i, posljedično, implementiran) od I$^2$C-a. Također je zamišljen kao \textit{master-slave} arhitektura s jednim \textit{masterom}, a za komunikaciju koristi četiri pina:
+		\begin{itemize}
+			\item \textbf{SCLK} (\textit{Serial CLocK}) - linija sa signalom takta, za sinkronizaciju,
+			\item \textbf{MOSI} (\textit{Master Output Slave Input}) - izlaz iz \textit{master} komponente i ulaz u \textit{slave} komponentu,
+			\item \textbf{MOSI} (\textit{Master Output Slave Input}) - izlaz iz \textit{slave} komponente i ulaz u \textit{master} komponentu; također jedina linija koja ulazi u \textit{master} komponentu,
+			\item \textbf{SS} (\textit{Slave Select}) - pin za adresiranje \textit{slave} komponente.
+		\end{itemize}
 
+		Budući da su u SPI protokolu prisutne dvije podatkovne linije, sada je već \textbf{moguća \textit{full duplex}} komunikacije, i to je ujedno glavna prednost SPI-a nad I$^2$C-om.
+	% paragraph spi (end)
+
+	\newpage
 	\subsection{Akcelerometar - Adafruit LIS3DH}
 		Tvrtka Adafruit se bavi razvojem otvorenog i pristupačnog sklopovlja, poglavito u edukativne svrhe. Tvrtka je od osnutka izdala na tržište mnoštvo vrlo raznolikih komponenti, a među njima i nekoliko akcelerometara. Jedan od njih je \textbf{LIS3DH}, vrlo popularan akcelerometar koji mjeri na 3 osi. Glavne karakteristike ovog sklopa su:
 		\begin{itemize}
-			\item 
+			\item mjerenje na \textbf{tri osi}
+			\item \textbf{10-bitna} preciznost
+			\item \textbf{I$^2$C i SPI} mogućnosti
+			\item vrlo mala potrošnja
+			\item vrlo niska cijena
+		\end{itemize}
+
+		\begin{figure}[h!]
+			\includegraphics[width=\linewidth]{slike/lis3dh.jpg}
+			\caption{Akcelerometar LIS3DH.}
+			\label{fig:lis3dh}
+		\end{figure}
+
+		\par Ako se koristi I$^2$C, onda CS (\textit{Chip Select}) mora biti ili otpojen ili pritegnut na visoku naponsku razinu. U protivnom, ako se koristi SPI, onda CS mora biti pritegnut na masu.
+
+		\par Sklop ima dvije moguće I$^2$C adrese - 0x18 i 0x19, tako da je moguće spojiti dva ovakva senzora na isti \textit{master}. Adresa se određuje tako da se pin SDO ostavi "u zraku" ili pritegne na nisku razinu za 0x18, odnosno na visoku razinu za 0x19. \\
+		RPi3 u svojim GPIO pinovima ima dva para I$^2$C pinova - I$^2$C0 i I$^2$C1. Svejedno je koji se koristi, samo je ključno da se parovi ne pomiješaju - SDA0 mora biti uparen s SCL0, a ne s SCL1, recimo. Primjer I$^2$C spajanja prikazan je na slici lalala
+
+		\par Spajanje preko SPI-a izvodi se tako da je SCL i dalje u ulozi signala takta, ali je pin označen kao SDA sada u ulozi MOSI, a pin SDO u ulozi MISO pina. CS, kao što je već rečeno, za SPI mora biti uzemljen. Primjer SPI spajanja prikazan je na slici lalala.b.
+
+		\par Ovime su ispunjeni sklopovski preduvjeti za osnovnu komunikaciju između senzora i RPi-ja, i za jednostavne primjere nije potrebno ništa više, ali ovaj senzor ima još nekoliko pinova koji nude interesantne mogućnosti:
+		\begin{itemize}
+			\item \textbf{INT} - prekidni pin
+			\item \textbf{A1, A2, A3}
+		\end{itemize}
 
 
-
-
+	\newpage
 	\subsection{Mikrofon - Adafruit MAX4466 mejbi bejbi?}
 \newpage
 \section{Pregled dostupnih programskih okvira}

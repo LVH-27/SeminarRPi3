@@ -16,9 +16,17 @@ Slike za hardver? Druga strana?
 
 Port == priključak?
 
+Jel ima potrebe uopće za I2C i SPI objašnjavanje?
+
 Pinout slika?
 
+Interpunkcija u captionima slika?
 
 https://www.raspberrypi.org/magpi/raspberry-pi-3-specs-benchmarks/
 
 http://www.datasheetcafe.com/bcm2837-datasheet-quad-core-processor-broadcom/
+
+https://learn.adafruit.com/circuitpython-hardware-lis3dh-accelerometer/hardware
+
+https://www.adafruit.com/product/1063
+https://learn.adafruit.com/piccolo
