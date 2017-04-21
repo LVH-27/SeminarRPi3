@@ -157,15 +157,27 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 		\par Ako se koristi I$^2$C, onda CS (\textit{Chip Select}) mora biti ili otpojen ili pritegnut na visoku naponsku razinu. U protivnom, ako se koristi SPI, onda CS mora biti pritegnut na masu.
 
 		\par Sklop ima dvije moguće I$^2$C adrese - 0x18 i 0x19, tako da je moguće spojiti dva ovakva senzora na isti \textit{master}. Adresa se određuje tako da se pin SDO ostavi "u zraku" ili pritegne na nisku razinu za 0x18, odnosno na visoku razinu za 0x19. \\
-		RPi3 u svojim GPIO pinovima ima dva para I$^2$C pinova - I$^2$C0 i I$^2$C1. Svejedno je koji se koristi, samo je ključno da se parovi ne pomiješaju - SDA0 mora biti uparen s SCL0, a ne s SCL1, recimo. Primjer I$^2$C spajanja prikazan je na slici lalala
+		RPi3 u svojim GPIO pinovima ima dva para I$^2$C pinova - I$^2$C0 i I$^2$C1. Svejedno je koji se koristi, samo je ključno da se parovi ne pomiješaju - SDA0 mora biti uparen s SCL0, a ne s SCL1, recimo. Primjer I$^2$C spajanja prikazan je na Slici \ref{fig:lis3dhRpi} lijevo.
 
-		\par Spajanje preko SPI-a izvodi se tako da je SCL i dalje u ulozi signala takta, ali je pin označen kao SDA sada u ulozi MOSI, a pin SDO u ulozi MISO pina. CS, kao što je već rečeno, za SPI mora biti uzemljen. Primjer SPI spajanja prikazan je na slici lalala.b.
+		\par Spajanje preko SPI-a izvodi se tako da je SCL i dalje u ulozi signala takta, ali je pin označen kao SDA sada u ulozi MOSI, a pin SDO u ulozi MISO pina. CS, kao što je već rečeno, za SPI mora biti uzemljen. Primjer SPI spajanja prikazan je na Slici \ref{fig:lis3dhRpi} desno.
+
+		\begin{figure}[h!]
+			\includegraphics[width=\linewidth]{slike/i2cSpiMergeNoLabel.png}
+			\caption{Primjer povezivanja LIS3DH i RPi3 - I$^2$C (lijevo) i SPI (desno).}
+			\label{fig:lis3dhRpi}
+		\end{figure}
 
 		\par Ovime su ispunjeni sklopovski preduvjeti za osnovnu komunikaciju između senzora i RPi-ja, i za jednostavne primjere nije potrebno ništa više, ali ovaj senzor ima još nekoliko pinova koji nude interesantne mogućnosti:
 		\begin{itemize}
-			\item \textbf{INT} - prekidni pin
-			\item \textbf{A1, A2, A3}
+			\item INT - \textbf{prekidni pin}
+			\item A1, A2, A3 - analogno-digitalni pretvornici (engl. \textit{\textbf{ADC} - Analog-Digital Converter}) \\
 		\end{itemize}
+
+		Pinovi za ADC omogućuju da se na njih spoji neki analogni ulaz, koji će čip potom digitalizirati, s 10-bitnom preciznošću. Ovo se može pokazati pogodnim za situaciju u kojoj nemamo drugi ADC uređaj. 
+
+		\par Prekidni pin omogućuje slanje prekidnog signala kao rezultat različitih događaja - senzor, naime, ima ugrađenu podršku za prepoznavanje jednostrukog i dvostrukog kuckanja, promjene orijentacije i slobodnog pada. Tu je podršku moguće iskoristiti kao okidač za generiranje prekida. Dakle, kada se dogodi neki događaj koji želimo pratiti (primjerice, kucanje po nekoj površini), sklop može generirati prekidni zahtjev da obavijesti RPi da je došlo do takvog događaja.
+
+		\par \textbf{TU DOĐE PRIMJER KONFIGURACIJE PREKIDA?}
 
 
 	\newpage
