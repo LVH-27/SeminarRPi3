@@ -34,3 +34,18 @@ https://learn.adafruit.com/circuitpython-hardware-lis3dh-accelerometer/hardware
 
 https://www.adafruit.com/product/1063
 https://learn.adafruit.com/piccolo
+
+
+
+###### SPAJANJE ######
+
+otkrivena I2C adresa 0x18
+
+nije Adafruit_I2C nego Adafruit_GPIO.I2C as I2C
+	pa je onda objekt I2C.Device, a ne Adafruit_I2c
+
+nekaj za bus postavlja -1, a ne 1, pa dobije i2c--1 i pizdi
+	LIS3DH.py je u konstruktoru defaultno imao -1, pa sam postavio na 1 i radi
+
+click detection zasad nisam uspio
+	miz da on treba interrupt, hm
