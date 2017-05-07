@@ -177,17 +177,47 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 
 		\par Prekidni pin omogućuje slanje prekidnog signala kao rezultat različitih događaja - senzor, naime, ima ugrađenu podršku za prepoznavanje jednostrukog i dvostrukog kuckanja, promjene orijentacije i slobodnog pada. Tu je podršku moguće iskoristiti kao okidač za generiranje prekida. Dakle, kada se dogodi neki događaj koji želimo pratiti (primjerice, kucanje po nekoj površini), sklop može generirati prekidni zahtjev da obavijesti RPi da je došlo do takvog događaja.
 
-		\par \textbf{Primjer konfiguracije prekida?}
-
 
 	\newpage
 	\subsection{Mikrofon - Adafruit MAX4466?}
+	test
 \newpage
 \section{Pregled dostupnih programskih okvira}
+Tijekom pisanja ovog rada bio je dostupan samo akcelerometar LIS3DH, a budući da je taj senzor za kratku i jednostavnu demonstraciju rada sa senzorima bio i više nego dovoljan, LIS3DH je korišten za sva mjerenja prikazana u nastavku. Senzor će biti spojen na RPi koristeći protokol I$^2$C (kao što je prikazano na Slici \ref{fig:lis3dhRpi} lijevo), a za komunikaciju na programskoj razini koristit ćemo programski jezik \textbf{Python}, koji je vrlo pogodan upravo za brzu izradnju i testiranje prototipa različitih sustava.
+
+\paragraph{\underline{GPIO komunikacija u Pythonu}} % (fold)
+	\label{par:gpio_py}
+		Kao što je rečeno, i Adafruit i Raspberry Pi Foundation su tvrtke otvorene filozofije poslovanja, pa nude gotove biblioteke funkcija za rad s njihovim proizvodima. Iako je Adafruitu matična platforma Arduino, postoji i službena biblioteka za korištenje GPIO sučelja s njihovim proizvodima u Pythonu. Budući da smo za korištenje akcelerometra predvidjeli koristiti I$^2$C, koji koristi određene GPIO pinove, svakako ćemo trebati tu biblioteku, dostupnu na Github repozitoriju: \url{https://github.com/adafruit/Adafruit_Python_GPIO}
+		
+	% paragraph gpio_py (end)
+
+\paragraph{\underline{Biblioteka za LIS3DH}} % (fold)
+	\label{par:lis3dh_lib}
+		Sada kada imamo način komunikacije između Pythona i GPIO sučelja, potrebno je nekako uspostaviti komunikaciju i između GPIO sučelja i akcelerometra. Za taj će zadatak dobro poslužiti (neslužbena) biblioteka \textit{python-lis3dh}, koja implementira glavnu funkcionalnost akcelerometra, a dostupna je na Github repozitoriju: \url{https://github.com/mattdy/python-lis3dh}
+
+	% paragraph lis3dh_lib (end)
+
+
 
 \newpage
 \section{Primjeri}
+
+	
+
 	\subsection{Programski kôd}
+
+
+	Nije zgorega napomenuti da je bilo potrebno malo modificirati postojeći programski kôd kako bi proradio, jer je Adafruit repozitorij promijenjen od zadnje verzije \textit{python-lis3dh} biblioteke. Promjene se odnose na datoteku \texttt{LIS3DH.py} iz biblioteke \textit{python-lis3dh}:
+		\begin{itemize}
+			\item Linija koja se odnosi na učitavanje I$^2$C podrške više nije 
+			\texttt{from Adafruit\_I2C import Adafruit\_I2C} jer je \texttt{Adafruit\_I2C} verzija te biblioteke koja se više ne koristi. Sada je uputno koristiti biblioteku \texttt{Adafruit\_GPIO.I2C}, pa taj \textit{import} izgleda ovako:
+			\texttt{import Adafruit\_GPIO.I2C as I2C}. 
+			Nakon što su načinjene te promjene, u tijelu biblioteke još je potrebno izmijeniti svako pojavljivanje zastarjelog objekta \texttt{Adafruit\_I2C} u aktualni \texttt{I2C.Device}.
+			\item Konstruktor klase \texttt{LIS3DH} za pretpostavljenu oznaku I$^2$C sabirnice koristi vrijednost "-1", dok RPi ima samo sabirnice s oznakama "0" i "1". Prema tome, ovisno o tome koja se od njih koristi (u nastavku rada je to sabirnica 1), potrebno je ili "hardkodirati" vrijednost sabirnice ili naći način za detekciju korištene sabirnice. Zbog vremenskih ograničenja i obujma ovog rada, prihvatljivo je rješenje bilo "hardkodirati" vrijednost "1", pa tako zaglavlje konstruktora klase \texttt{LIS3DH} izgleda ovako: 
+			\texttt{def \_\_init\_\_(self, address=0x18, \textbf{bus=1}, debug=False)}.
+		\end{itemize}
+		Nakon ovih preinaka, biblioteka je funkcionalna i možemo nastaviti s radom.
+
 	\subsection{Očitani podaci}
 
 \newpage
