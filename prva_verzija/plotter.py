@@ -20,11 +20,10 @@ while(1):
 	except EOFError as e:
 		break
 
-x = plt.plot(X, color="r", label="X axis")
-y = plt.plot(Y, color="g", label="Y axis")
-z = plt.plot(Z, color="b", label="Z axis")
-c = plt.plot(C, color="k", label="Click detection")
+plt.plot(X, color="r", label="X axis")
+plt.plot(Y, color="g", label="Y axis")
+plt.plot(Z, color="b", label="Z axis")
+plt.plot(C, color="k", label="Click detection")
 plt.ylabel("Relative acceleration")
 plt.xlabel("Time")
-#plt.legend(["X","Y","Z","Click detection"],bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 plt.show()

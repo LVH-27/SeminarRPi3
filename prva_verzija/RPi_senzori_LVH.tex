@@ -4,6 +4,42 @@
 \usepackage[utf8]{inputenc}
 \usepackage[hyphens]{url}
 
+\usepackage{listings}
+
+\usepackage{color}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{Python}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstdefinestyle{Bash}{
+	backgroundcolor=\color{backcolour},
+	basicstyle=\ttfamily,
+  	showstringspaces=false,
+  	commentstyle=\color{red},
+  	keywordstyle=\color{blue}
+}
+
 \usepackage{graphicx}
 
 \usepackage[margin=2cm]{geometry}
@@ -197,28 +233,127 @@ Tijekom pisanja ovog rada bio je dostupan samo akcelerometar LIS3DH, a budući d
 
 	% paragraph lis3dh_lib (end)
 
+\paragraph{\underline{Biblioteka za MAX4466}} % (fold)
+	\label{par:max4466_lib}
+		PLACEHOLDER
+
+	% paragraph max4466 (end)
 
 
 \newpage
 \section{Primjeri}
+	Kao primjer korištenja akcelerometra provedeno je nekoliko relativno jednostavnih mjerenja:
+	\begin{enumerate}
+		\item Prvo je mjerenje provedeno tako da je senzor bio pričvršćen za vodoravnu površinu stola ljepljivom trakom - paralelno s njom - a promatrana su dva tipa podražaja:
+		\begin{enumerate}
+			\item \textbf{kucanje} po stolu uobičajene jačine
+			\item \textbf{agresivno udaranje} šakom po stolu
+		\end{enumerate}
+		I kucanje i udaranje došlo je s druge strane stola - emulirajući, primjerice, kucanje na ulaznim vratima u stan. Također, svaki je period sadržao dva udarca, pa pauzu, a mjerena su 4 perioda. Svrha ovakvog mjerenja je utvrđivanje mogućnosti detekcije udarca na temelju \textbf{impulsne vibracije}. Radi lakšeg čitanja rezultantnog grafa i utvrđivanja preciznosti detekcije kucanja, ritam kucanja i udaranja pratio je metronom.
+		\item Drugo je mjerenje provedeno tako da je senzor bio pričvršćen na tijelo bas gitare, te je potom \textbf{odsviran ton A} (približno 55 Hz). Ovo je mjerenje odrađeno sa svrhom utvrđivanja koliko dobro senzor "snima" \textbf{kontinuiranu vibraciju} (s prirodnim prigušenjem).
+	\end{enumerate}
 
-	
+	Za prvo je mjerenje također korišten i \textbf{prekidni pin} (spojen na GPIO 04, što je definirano u datoteci \texttt{LIS3DH.py}), koji je generirao prekide kada bi otkrio kucanje.\\
+	Budući da drugo mjerenje nije imalo impulsne podražaje, taj pin nije korišten. \\
+
+	\par Za komunikaciju između laptopa i RPi-ja korišten je \textbf{SSH (Secure SHell) protokol}, koji omogućuje udaljeno upravljanje nekim računalom u mreži - u bitnome, omogućuje mrežni pristup terminalu OS-a na RPi-ju i pokretanje naredbi na njemu. \\
+
+	Programski kôd i rezultati mjerenja (u grafičkom obliku) dani su u nastavku. \\
 
 	\subsection{Programski kôd}
 
+	\paragraph{\underline{Očitavanje podataka}} % (fold)
+	\label{par:reading_data}
+		Za testiranje senzora korišten je Python program iz navedenog repozitorija, čija je glavna funkcija izložena u nastavku:
 
-	Nije zgorega napomenuti da je bilo potrebno malo modificirati postojeći programski kôd kako bi proradio, jer je Adafruit repozitorij promijenjen od zadnje verzije \textit{python-lis3dh} biblioteke. Promjene se odnose na datoteku \texttt{LIS3DH.py} iz biblioteke \textit{python-lis3dh}:
+		\lstinputlisting[style=Python]{testLIS3DH.py}
+
+		\par Izlaz testnog programa se, dakle, većinski sastoji od ispisa \textbf{očitanja u X, Y i Z smjerovima}, a vrijednosti su realni brojevi, ugrubo u rasponu od -1 do 1. Radi sažetosti nije prikazan kôd odgovoran za otkrivanje kucanja, koje u ispis dodaje još nekoliko linija koje obavještavaju korisnika da je očitano kucanje ("single click").
+		\par Program je, naravno, pokrenut na RPi-ju, \texttt{Bash} naredbom: \\
+		\texttt {python testLIS3DH.py > out.txt}.
+
+	% paragraph reading_data (end)
+
+	\paragraph{\underline{Agregiranje i iscrtavanje rezultata}} % (fold)
+	\label{par:plotting}
+		Da bismo na temelju očitanih podataka mogli iscrtati grafove, izlaz mjerenja spremljen je u tekstualnu datoteku \texttt{out.txt} na RPi-ju. Koristeći \textbf{SCP (Secure Copy Protocol)}, protokol za kopiranje datoteka između računala u mreži, ta je datoteka potom prebačena na laptop, gdje su podaci agregirani i vizualizirani. Za to je poslužila jednostavna Bash skripta:
+
+		\lstinputlisting[style=Bash]{prepare.sh}
+
+		\par Dakle, nakon prebacivanja datoteke s očitanjem na laptop (prva linija skripte) i njenog uređivanja (uklanjanje početnih linija koje ne sadrže mjerene podatke; druga linija skripte), u trećoj je liniji pokrenut vlastiti Python program koji agregira podatke i, koristeći ugrađenu biblioteku \textbf{\texttt{matplotlib.pyplot}}, iscrtava ih na grafove. Ukupno su generirane 4 za mjerenje impulsa, odnosno 3 krivulje za mjerenje kontinuirane vibracije:
+
+		\lstinputlisting[style=Python]{plotter.py}
+
+	% paragraph plotting (end)
+
+
+	Nije zgorega napomenuti da je bilo potrebno malo modificirati postojeći programski kôd kako bi proradio, jer je Adafruit repozitorij promijenjen od zadnje verzije \texttt{python-lis3dh} biblioteke. Promjene se odnose na datoteku \texttt{LIS3DH.py} iz biblioteke \texttt{python-lis3dh}:
 		\begin{itemize}
 			\item Linija koja se odnosi na učitavanje I$^2$C podrške više nije 
 			\texttt{from Adafruit\_I2C import Adafruit\_I2C} jer je \texttt{Adafruit\_I2C} verzija te biblioteke koja se više ne koristi. Sada je uputno koristiti biblioteku \texttt{Adafruit\_GPIO.I2C}, pa taj \textit{import} izgleda ovako:
 			\texttt{import Adafruit\_GPIO.I2C as I2C}. 
 			Nakon što su načinjene te promjene, u tijelu biblioteke još je potrebno izmijeniti svako pojavljivanje zastarjelog objekta \texttt{Adafruit\_I2C} u aktualni \texttt{I2C.Device}.
-			\item Konstruktor klase \texttt{LIS3DH} za pretpostavljenu oznaku I$^2$C sabirnice koristi vrijednost "-1", dok RPi ima samo sabirnice s oznakama "0" i "1". Prema tome, ovisno o tome koja se od njih koristi (u nastavku rada je to sabirnica 1), potrebno je ili "hardkodirati" vrijednost sabirnice ili naći način za detekciju korištene sabirnice. Zbog vremenskih ograničenja i obujma ovog rada, prihvatljivo je rješenje bilo "hardkodirati" vrijednost "1", pa tako zaglavlje konstruktora klase \texttt{LIS3DH} izgleda ovako: 
-			\texttt{def \_\_init\_\_(self, address=0x18, \textbf{bus=1}, debug=False)}.
+			\item Konstruktor klase \texttt{LIS3DH} za pretpostavljenu oznaku I$^2$C sabirnice koristi vrijednost "-1", dok RPi ima samo sabirnice s oznakama "0" i "1". Prema tome, ovisno o tome koja se od njih koristi (u nastavku rada je to sabirnica 1), potrebno je ili "hardkodirati" vrijednost sabirnice ili naći način za detekciju korištene sabirnice. Zbog vremenskih ograničenja i obujma ovog rada, prihvatljivo je rješenje bilo "hardkodirati" vrijednost "1", pa tako zaglavlje konstruktora klase \texttt{LIS3DH} izgleda ovako: \\ 
+			\texttt{def \_\_init\_\_(self, address=0x18, \underline{bus=1}, debug=False)}.
 		\end{itemize}
-		Nakon ovih preinaka, biblioteka je funkcionalna i možemo nastaviti s radom.
+		Nakon ovih preinaka, biblioteka je postala funkcionalna.
 
+	\newpage
 	\subsection{Očitani podaci}
+	Preostaje nam još proučiti dobivene grafove. Na svim grafovima vrijedi sljedeća legenda:
+	\begin{itemize}
+		\item Crvena boja - X os akcelerometra,
+		\item Zelena boja - Y os akcelerometra,
+		\item Plava boja - Z os akcelerometra,
+		\item Crna boja - detekcija kucanja.
+	\end{itemize}
+
+	\paragraph{\underline{Kucanje}} % (fold)
+	\label{par:click}
+	Prvo je na redu kucanje. Prikazano je grafom na Slici \ref{fig:click}.
+
+	\begin{figure}[h!]
+	  \includegraphics[width=\linewidth]{slike/click.png}
+	  \caption{Kucanje}
+	  \label{fig:click}
+	\end{figure}
+
+	Odmah je očito da specijalizirana detekcija kucanja radi ispravno - vide se 4 para kucanja. Međutim, interesantno je da se, barem "na prvu", kucanje ne može intuitivno iščitati iz valnog oblika nijedne od krivulja. Z-os ima najveće oscilacije, što i ima smisla, jer je akcelerometar bio učvršćen vodoravno i prema gore (zato vrijednosti za Z os osciliraju oko 1, a ne oko 0 kao što je to slučaj za preostale dvije osi), pa je svaki udarac najviše utjecao upravo na nagib senzora.
+	\par Dobro je primijetiti i da su već u takvom, relativno slabo učvršćenom okruženju, šumovi i slabe okolne vibracije, dovoljno prigušeni za X i Y osi. Izvor artefakta na cca. 65. vremenskoj jedinici nije poznat, ali interesantno je primijetiti da ni takva velika anomalija nije uspjela "zbuniti" sustav za detekciju kucanja.
+
+	% paragraph click (end)
+	\newpage
+	\paragraph{\underline{Udaranje}} % (fold)
+	\label{par:aggro}
+	Sljedeći graf koji promatramo jest udaranje. Prikazan je na Slici \ref{fig:aggro}.
+
+	\begin{figure}[h!]
+	  \includegraphics[width=\linewidth]{slike/aggro.png}
+	  \caption{Udaranje}
+	  \label{fig:aggro}
+	\end{figure}
+
+	U ovom slučaju detekcija kucanja također uglavnom radi - prvi i drugi par udaraca izgledaju kako bi trebali izgledati. Međutim, na trećem je paru senzor očitao i jedan lažni udarac, dok je zadnji udarac izazvao za senzor toliko snažne vibracije da je nekoliko vremenskih jedinica bio postavljen prekidni signal, što rezultira valnim oblikom koji nema "špicu", nego traje neko vrijeme.
+	\par Također, na ovom se grafu već \textit{nešto} može zaključiti i na temelju valnih oblika pojedinih osi. Ipak, očito i dalje takav pristup nije sasvim pouzdan. Možemo zaključiti da sklop snažne udarce ne podnosi najbolje što se tiče preciznosti mjerenja, ali to je možda i adekvatno za sustav gdje je poželjna visoka osjetljivost - u mirnim periodima sklop ne oscilira jako, pa bi se, uz propisno učvršćivanje i eliminaciju šuma, mogao jako dobro iskoristiti.
+
+	% paragraph aggro (end)
+
+	\newpage
+	\paragraph{\underline{Prigušeno titranje}} % (fold)
+	\label{par:bass}
+	Posljednji graf predstavlja "snimku" tona A odsviranom na električnoj bas gitari. Graf je prikazan na Slici \ref{fig:bass3}.
+
+	\begin{figure}[h!]
+	  \includegraphics[width=\linewidth]{slike/bass3.png}
+	  \caption{Ton A}
+	  \label{fig:bass3}
+	\end{figure}
+
+	Čim pogledamo valni oblik na X-osi, očito da je senzor očitao nekakvo prigušeno titranje ugrubo stalne frekvencije. Na Z-osi i dalje vidimo najveći šum, iz istog razloga kao i ranije. Y-os, pak, opet ima prilično malen šum, pogotovo prije trenutka 40. Oko trenutka 40 je trznuta žica, te instrument počinje vibrirati - na X-osi vidimo da je riječ o stabilnoj frekvenciji i urednom prigušenju. Titranje je daleko najizraženije na X-osi zato što je pravac titranja žice skoro potpuno poklopljen s tom osi, pa se svaki titraj daleko najviše osjeti na dijelu sklopa zaduženom za očitanje na toj osi.
+	\par Iz ovog eksperimenta možemo zaključiti da LIS3DH, iako je akcelerometar, a ne mikrofon, pa vrlo vjerojatno nije optimiziran za stabilno očitanje frekvencije, pokazuje sasvim pristojne i predvidive rezultate u okruženju s kontinuiranom vibracijom. Bilo bi interesantno ponoviti eksperiment i s mikrofonom MAX4466, pa usporediti rezultate, ali, nažalost, taj mikrofon trenutno nije na raspolaganju.
+
+	% paragraph bass (end)
+
 
 \newpage
 \section{Zaključak}
