@@ -129,7 +129,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 	\\
 	\paragraph{\underline{Pametna brava}} % (fold)
 	\label{par:smart_lock}
-		Pametne su brave koncept novijeg datuma, a označavaju autorizaciju ulaza osobe u neki prostor, i to ne koristeći (samo) klasični, mehanički ključ, nego korištenje kartica, lozinki, ili čak primjerice, prepoznavanja lica. Za implementaciju jedne takve brave može poslužiti bilo kakav mikrokontroler, i RPi3 bi svakako bio pretjeran za tako jednostavan zadatak, ali ono što bi moglo umanjiti taj \textit{overhead} jest, primjerice, praćenje pristupa prostoru pomoću logova, udaljeno upravljanje bravom, ili agregiranje više neovisnih zadataka slične složenosti na jednom RPi-ju.
+		Pametne su brave koncept novijeg datuma, a označavaju autorizaciju ulaza osobe u neki prostor, i to ne koristeći (samo) klasični, mehanički ključ, nego korištenje kartica, lozinki, ili čak, primjerice, prepoznavanja lica. Za implementaciju jedne takve brave može poslužiti bilo kakav mikrokontroler, i RPi3 bi svakako bio pretjeran za tako jednostavan zadatak, ali ono što bi moglo umanjiti taj \textit{overhead} jest, primjerice, praćenje pristupa prostoru pomoću logova, udaljeno upravljanje bravom, ili agregiranje više neovisnih zadataka slične složenosti na jednom RPi-ju.
 		\par Računarska sekcija Kluba studenata elektrotehnike konkretno koristi Raspberry Pi 3 za agregiranje informacija o radu nekoliko servera, a u planu je spajanje NFC čitača (\textit{Near-Field Communication} - tehnologija beskontaktne komunikacije korištena u studentskim iskaznicama i bankovnim karticama) na taj isti RPi3, kako bi se na taj način autenticiralo osobe koje žele ući u sekciju.
 
 	% paragraph smart_lock (end)
@@ -181,7 +181,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 			\item \textbf{10-bitna} preciznost
 			\item \textbf{I$^2$C i SPI} mogućnosti
 			\item vrlo mala potrošnja
-			\item vrlo niska cijena
+			\item niska cijena
 		\end{itemize}
 
 		\begin{figure}[h!]
@@ -193,7 +193,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 		\par Ako se koristi I$^2$C, onda CS (\textit{Chip Select}) mora biti ili otpojen ili pritegnut na visoku naponsku razinu. U protivnom, ako se koristi SPI, onda CS mora biti pritegnut na masu.
 
 		\par Sklop ima dvije moguće I$^2$C adrese - 0x18 i 0x19, tako da je moguće spojiti dva ovakva senzora na isti \textit{master}. Adresa se određuje tako da se pin SDO ostavi "u zraku" ili pritegne na nisku razinu za 0x18, odnosno na visoku razinu za 0x19. \\
-		RPi3 u svojim GPIO pinovima ima dva para I$^2$C pinova - I$^2$C0 i I$^2$C1. Svejedno je koji se koristi, samo je ključno da se parovi ne pomiješaju - SDA0 mora biti uparen s SCL0, a ne s SCL1, recimo. Primjer I$^2$C spajanja prikazan je na Slici \ref{fig:lis3dhRpi} lijevo.
+		RPi3 u svojim GPIO pinovima ima dva para I$^2$C pinova - I$^2$C0 i I$^2$C1. Svejedno je koji se koristi, samo je, naravno, ključno da se parovi ne pomiješaju - SDA0 mora biti uparen s SCL0, a ne s SCL1, i obrnuto. Primjer I$^2$C spajanja prikazan je na Slici \ref{fig:lis3dhRpi} lijevo.
 
 		\par Spajanje preko SPI-a izvodi se tako da je SCL i dalje u ulozi signala takta, ali je pin označen kao SDA sada u ulozi MOSI, a pin SDO u ulozi MISO pina. CS, kao što je već rečeno, za SPI mora biti uzemljen. Primjer SPI spajanja prikazan je na Slici \ref{fig:lis3dhRpi} desno.
 
@@ -209,15 +209,36 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 			\item A1, A2, A3 - analogno-digitalni pretvornici (engl. \textit{\textbf{ADC} - Analog-Digital Converter}) \\
 		\end{itemize}
 
-		Pinovi za ADC omogućuju da se na njih spoji neki analogni ulaz, koji će čip potom digitalizirati, s 10-bitnom preciznošću. Ovo se može pokazati pogodnim za situaciju u kojoj nemamo drugi ADC uređaj. 
+		Pinovi za ADC omogućuju da se na njih spoji neki analogni ulaz, koji će čip potom digitalizirati, s 10-bitnom preciznošću. Ovo se može pokazati pogodnim za situaciju u kojoj nemamo drugi ADC uređaj - kao što je, uostalom, i sâm RPi. RPi, naime, nema analogne, već samo digitalne ulaze, pa tako ADC pada u vodu bez dodatnog sklopovlja za tu namjenu.
 
 		\par Prekidni pin omogućuje slanje prekidnog signala kao rezultat različitih događaja - senzor, naime, ima ugrađenu podršku za prepoznavanje jednostrukog i dvostrukog kuckanja, promjene orijentacije i slobodnog pada. Tu je podršku moguće iskoristiti kao okidač za generiranje prekida. Dakle, kada se dogodi neki događaj koji želimo pratiti (primjerice, kucanje po nekoj površini), sklop može generirati prekidni zahtjev da obavijesti RPi da je došlo do takvog događaja.
 
 
+
+
 	\newpage
-	\subsection{Mikrofon - Adafruit MAX4466?}
-	test
-\newpage
+	\subsection{Mikrofon - Adafruit MAX4466}
+		Drugi je senzor koji proučavamo također od tvrtke Adafruit, a riječ je o elektretskom mikrofonu. To je vrsta kondenzatorskog mikrofona koja princip rada temelji na električkim svojstvima materijala od kojeg je načinjen mikrofon - elektreta. Mikrofon je prikazan na Slici \ref{fig:max4466}.
+
+		\begin{figure}[h!]
+			\includegraphics[width=\linewidth]{slike/4466.jpg}
+			\caption{Adafruit MAX4466.}
+			\label{fig:max4466}
+		\end{figure}
+
+		\par Sklop ima dva glavna funkcijska dijela:
+		\begin{itemize}
+			\item sâmi \textbf{elektretski mikrofon}, koji radi u rasponu frekvencija od 20Hz do 20kHz,
+			\item \textbf{operacijsko pojačalo Maxim MAX4466}, koje ima ugrađeno filtriranje šumova iz napajanja, što ga čini vrlo pogodnim za "čisto" pojačavanje mikrofonskog signala.
+		\end{itemize}
+
+		Sklop također nudi vrlo zgodnu mogućnost \textbf{sklopovski promjenjivog pojačanja} mikrofonskog signala, i to preko potenciometra koji se nalazi na stražnjoj strani sklopa, pa je tako faktor pojačanja moguće namjestiti na vrijednosti između 25 i 125. Ovo svojstvo omogućava širenje mogućnosti korištenja sklopa, jer ga je moguće prilagoditi i tihim i glasnim okruženjima.
+
+		\par Budući da sklop ima samo 3 pina, za očekivati je da ga je relativno jednostavno koristiti - barem što se tiče spajanja. I doista - uz pinove GND i Vcc (uzemljenje, odnosno napajanje) postoji još samo pin OUT, na koji izlazi \textbf{analogni} signal. Što se tiče spajanja senzora na sklop koji "razumije" analogne signale, posao je završen. Ali - kao što je ranije napomenuto, RPi nema analogne, već samo digitalne ulaze, tako da je za očitavanje podataka sa senzora nužno u cijelu priču uvesti i neki ADC sklop. Ako bismo u istom projektu koristili i ranije obrađeni LIS3DH, koji ima 3 ADC ulaza, tada bismo jedan od tih analognih ulaza mogli upotrijebiti upravo za digitalizaciju izlaza mikrofona!
+
+		\par Konačno, što se tiče električkih karakteristika sklopa, za njegovo je napajanje potrebno koristiti napon između 2.4 i 5V. Izlaz sklopa je istosmjerno spregnut (engl. \textit{DC coupled}), pa tako u potpuno tihom okruženju vrijednost na izlazu iznosi pola napona napajanja Vcc.
+
+
 \section{Pregled dostupnih programskih okvira}
 Tijekom pisanja ovog rada bio je dostupan samo akcelerometar LIS3DH, a budući da je taj senzor za kratku i jednostavnu demonstraciju rada sa senzorima bio i više nego dovoljan, LIS3DH je korišten za sva mjerenja prikazana u nastavku. Senzor će biti spojen na RPi koristeći protokol I$^2$C (kao što je prikazano na Slici \ref{fig:lis3dhRpi} lijevo), a za komunikaciju na programskoj razini koristit ćemo programski jezik \textbf{Python}, koji je vrlo pogodan upravo za brzu izradnju i testiranje prototipa različitih sustava.
 
@@ -229,13 +250,15 @@ Tijekom pisanja ovog rada bio je dostupan samo akcelerometar LIS3DH, a budući d
 
 \paragraph{\underline{Biblioteka za LIS3DH}} % (fold)
 	\label{par:lis3dh_lib}
-		Sada kada imamo način komunikacije između Pythona i GPIO sučelja, potrebno je nekako uspostaviti komunikaciju i između GPIO sučelja i akcelerometra. Za taj će zadatak dobro poslužiti (neslužbena) biblioteka \textit{python-lis3dh}, koja implementira glavnu funkcionalnost akcelerometra, a dostupna je na Github repozitoriju: \url{https://github.com/mattdy/python-lis3dh}
+		Sada kada imamo način komunikacije između Pythona i GPIO sučelja, potrebno je nekako uspostaviti komunikaciju i između GPIO sučelja i akcelerometra. Za taj će zadatak dobro poslužiti (neslužbena) biblioteka \texttt{python-lis3dh}, koja implementira glavnu funkcionalnost akcelerometra, a dostupna je na Github repozitoriju: \url{https://github.com/mattdy/python-lis3dh} \\
+		Još vrijedi istaknuti da je u toj biblioteci implementirana i funkcija detekcije jednostrukog kucanja. Ostale funkcije (detekcija slobodnog pada i promjene orijentacije), nažalost, u ovoj biblioteci još nisu implementirane.
+
 
 	% paragraph lis3dh_lib (end)
 
-\paragraph{\underline{Biblioteka za MAX4466}} % (fold)
+\paragraph{\underline{Programska podrška za MAX4466}} % (fold)
 	\label{par:max4466_lib}
-		PLACEHOLDER
+		Budući da MAX4466 ima analogni izlaz, a RPi samo digitalne ulaze, nekakva biblioteka funkcija za MAX4466 konceptualno jednostavno nije primjenjiv pojam. Budući da smo ionako primorani koristiti neki ADC sklop kao sučelje između RPi-ja i MAX4466, za očitavanje (digitaliziranog) izlaza MAX4466 poslužit će biblioteka za komunikaciju s GPIO pinovima, a jednom kada očitamo te podatke, njihova daljnja obrada ovisi o primjeni mikrofona.
 
 	% paragraph max4466 (end)
 
@@ -357,16 +380,25 @@ Tijekom pisanja ovog rada bio je dostupan samo akcelerometar LIS3DH, a budući d
 
 \newpage
 \section{Zaključak}
+	Cilj ovog rada bio je izložiti kratak opis računala Raspberry Pi, te demonstrirati široke mogućnosti njegovog korištenja s različitim senzorima. Iz svega navedenog, može se zaključiti da je RPi3 jedan iznimno fleksibilan sklop, koji je interesantan mnogim entuzijastima i stručnjacima - poglavito zbog ogromnog spektra mogućnosti koje nudi, kako u \textit{low-level} ugradbenoj, tako i u IoT (\textit{Internet of Things}, koncepcija spajanja ugradbenog sklopovlja na internet) domeni. Računalo je kao takvo vrlo popularno u raznim kućnim projektima, poput automatizacije nekih zadataka ili praćenja kontinuiranih prilika (poput, primjerice, temperature, buke ili kretanja), a vrlo je iskoristiv i u multimedijske svrhe. \\
+
+	\par Ma koliko RPi bio moćan, ipak je i dalje riječ o ugradbenom računalu, pa je razumno očekivati da ima podršku za \textit{low-level} komunikaciju. Naravno, to je očekivanje ispunjeno - najpopularniji sklopovski komunikacijski protokoli (SPI, I$^2$C i TTL) su podržani i u potpunosti implementirani. Naravno, nije se stalo tu - implementirana je i podrška za USB i internetsku vezu, a od inačice 3 postoji i sasvim stabilna podrška za bežičnu vezu - konkretno, za \textit{WiFi} i \textit{Bluetooth} protokole. \\
+
+	\par Uz RPi, izloženi su i jedan akcelerometar (LIS3DH) i jedan mikrofon (MAX4466), s posebnim osvrtom na njihovu komunikaciju s RPi-jem. Riječ je o interesantnim sklopovima koji pružaju mnogo mogućnosti, a iznimno ih je jednostavno "upregnuti" uz RPi. \\
+
+	\par Budući da je riječ o otvorenim tehnologijama, ne čudi da je na internetu dostupno mnoštvo gotovih i funkcionalnih biblioteka za korištenje i računala i senzora, a te se biblioteke još uvijek razvijaju i otvorene su za korištenje i suradnju svim entuzijastima. Za LIS3DH je obavljeno i nekoliko eksperimenata u kojima se mjerio odziv senzora na različite podražaje. Izloženi su i prokomentirani rezultati mjerenja, i pokazalo se da je za dobar dio primjena LIS3DH ponudio vrlo dobre rezultate. Možda nije sasvim adekvatan za neka vrlo precizna mjerenja, ali je svakako dovoljno osjetljiv za većinu primjena. \\
+
+	\par Sve u svemu, RPi3 je vrlo moćan stroj koji je donio revoluciju u ugradbene sustave, a svakako je - zbog jednostavnosti primjene, spektru mogućnosti i raširenosti programske podrške, a i intelektualnih izazova koje nudi - našao svoje mjesto u okruženjima za edukaciju i prototipe.
+
 
 \newpage
 \section{Literatura}
 
 \begin{itemize}
 	\item Raspberry Pi službene stranice: \url{https://www.raspberrypi.org/}
-	\item ADXL345: \url{https://learn.adafruit.com/adxl345-digital-accelerometer}
-	\item MMA8451: \url{https://learn.adafruit.com/adafruit-mma8451-accelerometer-breakout/wiring-and-test?view=all}
 	\item LIS3DH: \url{https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout/downloads?view=all}
-	\item Zvučni senzori: \url{https://www.sunfounder.com/learn/sensor-kit-v2-0-for-raspberry-pi-b-plus/lesson-19-sound-sensor-sensor-kit-v2-0-for-b-plus.html}
+	\item MAX4466: \url{https://www.adafruit.com/product/1063}
+	\item Korištenje I$^2$C sučelja kroz Python: \url{http://www.instructables.com/id/Raspberry-Pi-I2C-Python/}
 \end{itemize}
 
 \end{document}
