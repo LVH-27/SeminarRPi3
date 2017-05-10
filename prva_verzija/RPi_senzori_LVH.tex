@@ -44,13 +44,16 @@
 
 \usepackage[margin=2cm]{geometry}
 \usepackage[colorlinks=true,urlcolor=black]{hyperref}
-\pagenumbering{gobble}
+\pagenumbering{arabic}
+
 
 \begin{document}
 	\title{Očitavanje senzorskih podataka korištenjem računala Raspberry Pi 3}
 
 
-	\date{\vspace{-5ex} 3. travnja 2017.}
+	\date{9. svibnja 2017.}
+	\author{Autor: \\ Leonard Volarić Horvat \\ \\ Mentori: \\ Nenad Katanić, mag. ing.\\
+Doc. dr. sc. Boris Milašinović}
 	\maketitle
 
 	\tableofcontents
@@ -151,18 +154,18 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 	\subsection{Komunikacijski protokoli}
 	\paragraph{\underline{I$^2$C}} % (fold)
 	\label{par:i2c}
-		I$^2$C (engl. \textit{Inter-Integrated Circuit}) komunikacija je protokol za sinkronu serijsku komunikaciju. Odlikuje ga iznimna jednostavnost korištenja - za upogoniti I$^2$C komunikaciju potrebne su samo dva pina:
+		I$^2$C (engl. \textit{Inter-Integrated Circuit}) komunikacija je protokol za sinkronu serijsku komunikaciju. Odlikuje ga iznimna jednostavnost korištenja - za upogoniti I$^2$C komunikaciju potrebna su samo dva pina:
 		\begin{itemize} 
 			\item \textbf{SDA} (\textit{Serial DAta line}) - podatkovna linija
 			\item \textbf{SCL} (\textit{Serial CLock}) - linija sa signalom takta, za sinkronizaciju.
 		\end{itemize}
-		Protokol omogućuje spajanje više uređaja s I$^2$C mogućnosti na istu sabirnicu, što znači da postoji i koncept adresiranja, kao i \textit{master-slave} arhitekture. Detalji implementacije toga su preširoki za ova rad, ali ukratko - svaki I$^2$C uređaj mora imati svoju, na sabirnici jedinstvenu adresu, koja se obično sastoji od dvije heksadekadske znamenke. 
+		Protokol omogućuje spajanje više uređaja s I$^2$C mogućnosti na istu sabirnicu, što znači da postoji i koncept adresiranja, kao i \textit{master-slave} arhitekture. Detalji implementacije toga su preširoki za ovaj rad, ali ukratko - svaki I$^2$C uređaj mora imati svoju, na sabirnici jedinstvenu adresu, koja se obično sastoji od dvije heksadekadske znamenke. 
 		Ono što je jednostavnost uporabe žrtvovala jest mogućnost istovremene dvosmjerne (engl. \textit{full duplex}) komunikacije - budući da postoji samo jedna podatkovna linija, očito je da je to nemoguće, već je moguća samo \textbf{naizmjenična dvosmjerna (engl. \textit{half duplex})} komunikacija.
 	% paragraph i2c (end)
 
 	\paragraph{\underline{SPI}} % (fold)
 	\label{par:spi}
-		SPI (\textit{Serial Peripheral Interface}) je također protokol za sinkronu serijsku komunikaciju, ali nešto drugačije koncipiran (i, posljedično, implementiran) od I$^2$C-a. Također je zamišljen kao \textit{master-slave} arhitektura s jednim \textit{masterom}, a za komunikaciju koristi četiri pina:
+		SPI (engl. \textit{Serial Peripheral Interface}) je također protokol za sinkronu serijsku komunikaciju, ali nešto drugačije koncipiran (i, posljedično, implementiran) od I$^2$C-a. Također je zamišljen kao \textit{master-slave} arhitektura s jednim \textit{masterom}, a za komunikaciju koristi četiri pina:
 		\begin{itemize}
 			\item \textbf{SCLK} (\textit{Serial CLocK}) - linija sa signalom takta, za sinkronizaciju,
 			\item \textbf{MOSI} (\textit{Master Output Slave Input}) - izlaz iz \textit{master} komponente i ulaz u \textit{slave} komponentu,
@@ -170,7 +173,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 			\item \textbf{SS} (\textit{Slave Select}) - pin za adresiranje \textit{slave} komponente.
 		\end{itemize}
 
-		Budući da su u SPI protokolu prisutne dvije podatkovne linije, sada je već \textbf{moguća \textit{full duplex}} komunikacije, i to je ujedno glavna prednost SPI-a nad I$^2$C-om.
+		Budući da su u SPI protokolu prisutne dvije podatkovne linije, sada je već \textbf{moguća \textit{full duplex}} komunikacija, i to je ujedno glavna prednost SPI-a nad I$^2$C-om.
 	% paragraph spi (end)
 
 	\newpage
@@ -228,7 +231,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 
 		\par Sklop ima dva glavna funkcijska dijela:
 		\begin{itemize}
-			\item sâmi \textbf{elektretski mikrofon}, koji radi u rasponu frekvencija od 20Hz do 20kHz,
+			\item sâmi \textbf{elektretski mikrofon}, koji radi u rasponu frekvencija od 20Hz do 20kHz, i
 			\item \textbf{operacijsko pojačalo Maxim MAX4466}, koje ima ugrađeno filtriranje šumova iz napajanja, što ga čini vrlo pogodnim za "čisto" pojačavanje mikrofonskog signala.
 		\end{itemize}
 
