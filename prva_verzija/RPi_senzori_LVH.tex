@@ -68,9 +68,9 @@ Ukratko će se opisati neke od dostupnih biblioteka i programskih okvira namijen
 
 \section{Raspberry Pi}
 
-Raspberry Pi je serija malih računala razvijanih od strane zaklade Raspberry Pi Foundation. Odlikuju ih niska cijena, dobre performanse s obzirom na cijenu, pristupačnost i lako korištenje te male fizičke dimenzije. Programska je podrška otvorena i vrlo dobro dokumentirana, a zajednica ljudi koji koriste Raspberry Pi je velika, pristupačna i konstruktivna. \\
+Raspberry Pi je serija malih računala koje razvija zaklada Raspberry Pi Foundation. Odlikuju ih niska cijena, dobre performanse s obzirom na cijenu, pristupačnost i lako korištenje te male fizičke dimenzije. Programska je podrška otvorena i vrlo dobro dokumentirana, a zajednica ljudi koji koriste Raspberry Pi je velika, pristupačna i konstruktivna. \\
 \par
-U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry Pi Zero. U nastavku će rada riječ biti o Raspberry Pi 3 inačici, koja se vidi na Slici \ref{fig:rpi3}, a bit će oslovljena kao "RPi3".
+U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry Pi Zero. U nastavku rada bit će riječi o Raspberry Pi 3 inačici, koja se vidi na Slici \ref{fig:rpi3}, a bit će oslovljena kao "RPi3".
 \begin{figure}[h!]
   \includegraphics[width=\linewidth]{slike/rpi3_color.png}
   \caption{Raspberry Pi 3B.}
@@ -109,7 +109,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 			\item Poseban \textit{display} priključak
 		\end{itemize}
 
-		\par Od posebne su važnosti za ovaj rad GPIO pinovi. Oni, su, naime, ključni za komunikaciju sa senzorima koji će biti razmotreni kasnije u radu. Omogućuju najčešće korištene \textit{low-level} protokole za sklopovsku komunikaciju: \textbf{I$^2$C, TTL i SPI.} Naravno, sadrže i pinove za napajanje i uzemljenje sklopova, kao i pinove namijenjene za korisničku definiciju ponašanja.
+		\par Od posebne su važnosti za ovaj rad GPIO pinovi. Oni, su, naime, ključni za komunikaciju sa senzorima koji će biti razmotreni kasnije u radu. Omogućuju najčešće korištene protokole niske razine za sklopovsku komunikaciju: \textbf{I$^2$C, TTL i SPI.} Naravno, sadrže i pinove za napajanje i uzemljenje sklopova, kao i pinove namijenjene za korisničku definiciju ponašanja.
 		% paragraph ulazno_izlazni_priključci (end)
 
 	\subsection{Programska podrška}
@@ -117,7 +117,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 
 		\par Raspbian je besplatan i otvoren operacijski sustav baziran na distribuciji Linuxa zvanoj "Debian". Ono zbog čega je Raspbian toliko popularan jest činjenica da je taj \textbf{OS optimiziran upravo za Raspberry Pi sklopovlje.}\footnote{Ovo se može zaključiti i iz imena distribucije, koje je \textit{portmanteau} pojmova "Raspberry Pi" i "Debian".} Drugim riječima, Raspbian je distribucija Linuxa koja:
 		\begin{itemize}
-			\item je vrlo jednostavna za instalaciju i dolazi potpuno opremljena za normalan računalni rad - uključujući i \textbf{grafičko korisničko sučelje} (\textit{GUI - Graphical User Interface}) 
+			\item je vrlo jednostavna za instalaciju i dolazi potpuno opremljena za normalan računalni rad - uključujući i \textbf{grafičko korisničko sučelje} (\textit{engl. GUI - Graphical User Interface}) 
 			\item dolazi s već instaliranom programskom podrškom za komunikaciju sa specijaliziranim sklopovljem (poput GPIO pinova) - primjerice, \textbf{iz terminala, C-a ili Pythona.}
 		\end{itemize}
 
@@ -133,13 +133,13 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 	\paragraph{\underline{Pametna brava}} % (fold)
 	\label{par:smart_lock}
 		Pametne su brave koncept novijeg datuma, a označavaju autorizaciju ulaza osobe u neki prostor, i to ne koristeći (samo) klasični, mehanički ključ, nego korištenje kartica, lozinki, ili čak, primjerice, prepoznavanja lica. Za implementaciju jedne takve brave može poslužiti bilo kakav mikrokontroler, i RPi3 bi svakako bio pretjeran za tako jednostavan zadatak, ali ono što bi moglo umanjiti taj \textit{overhead} jest, primjerice, praćenje pristupa prostoru pomoću logova, udaljeno upravljanje bravom, ili agregiranje više neovisnih zadataka slične složenosti na jednom RPi-ju.
-		\par Računarska sekcija Kluba studenata elektrotehnike konkretno koristi Raspberry Pi 3 za agregiranje informacija o radu nekoliko servera, a u planu je spajanje NFC čitača (\textit{Near-Field Communication} - tehnologija beskontaktne komunikacije korištena u studentskim iskaznicama i bankovnim karticama) na taj isti RPi3, kako bi se na taj način autenticiralo osobe koje žele ući u sekciju.
+		\par Računarska sekcija Kluba studenata elektrotehnike konkretno koristi Raspberry Pi 3 za agregiranje informacija o radu nekoliko servera, a u planu je spajanje NFC čitača (engl. \textit{Near-Field Communication} - tehnologija beskontaktne komunikacije korištena u studentskim iskaznicama i bankovnim karticama) na taj isti RPi3, kako bi se na taj način autenticiralo osobe koje žele ući u sekciju.
 
 	% paragraph smart_lock (end)
 
 	\paragraph{\underline{Kućni VPN i WiFi pristupna točka}} % (fold)
 	\label{par:home_vpn}
-		U kontekstu komunikacijskih mreža, VPN (\textit{Virtual Private Network}) je protokol spajanja na mrežu koji omogućuje virtualno pristupanje mreži s drugog mjesta i prosljeđivanje svòg lokalnog prometa kroz taj "tunel" na način koji osigurava privatnost i sigurnost, kao i (do neke mjere) svojstva mreže (dozvole i zabrane, primjerice, ili simulacija lokalnog pristupa) kakva su na udaljenoj mreži na koju je korisnik VPN-om spojen. Implementacijski detalji VPN-a nipošto nisu trivijalni, i neće se dalje razmatrati u ovom radu, ali takav se sustav relativno bezbolno može upogoniti upravo koristeći Raspberry Pi, umjesto da se (samo?) za taj zadatak koristi neko (red veličine skuplje) računalo opće namjene.
+		U kontekstu komunikacijskih mreža, VPN (engl. \textit{Virtual Private Network}) je protokol spajanja na mrežu koji omogućuje virtualno pristupanje mreži s drugog mjesta i prosljeđivanje svòg lokalnog prometa kroz taj "tunel" na način koji osigurava privatnost i sigurnost, kao i (do neke mjere) svojstva mreže (dozvole i zabrane, primjerice, ili simulacija lokalnog pristupa) kakva su na udaljenoj mreži na koju je korisnik VPN-om spojen. Implementacijski detalji VPN-a nipošto nisu trivijalni, i neće se dalje razmatrati u ovom radu, ali takav se sustav relativno bezbolno može upogoniti upravo koristeći Raspberry Pi, umjesto da se (samo?) za taj zadatak koristi neko (red veličine skuplje) računalo opće namjene.
 		\par Još jedna zanimljiva mogućnost koju pruža RPi3 (ali ne i ranije inačice - barem ne bez dodatnog sklopovlja) jest postavljanje pristupne točke za WiFi, koja bi bežični promet prosljeđivala žičnoj Ethernet vezi. Tako se može, u nedostatku kompletnijeg i trajnijeg rješenja, ostvariti \textit{ad hoc} bežična mreža ili pojačivač signala.
 
 	% paragraph home_vpn (end)
@@ -148,8 +148,8 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 
 
 \section{Senzori}
-	Sada kada je definirano računalo koje će agregirati i analizirati očitanja senzora koje ćemo koristiti, vrijeme je da i o njima nešto rečemo. Slučaj koji promatramo jest \textbf{mjerenje vibracija} na mirnim površinama poput vrata, sa svrhom utvrđivanja \textbf{izvora} vibracija. Shodno tome, slijede kratki pregledi jednog akcelerometra - senzora za mjerenje relativnog ubrzanja - te jednog senzora glasnoće.
-	Ipak, prije toga, radi lakšeg razumijevanja slijedi vrlo kratki opis dva ranije spomenuta \textit{low-level} komunikacijska protokola.
+	Sada kada je definirano računalo koje će agregirati i analizirati očitanja senzora koje ćemo koristiti, vrijeme je da i o njima nešto kažemo. Slučaj koji promatramo jest \textbf{mjerenje vibracija} na mirnim površinama poput vrata, sa svrhom utvrđivanja \textbf{izvora} vibracija. Shodno tome, slijede kratki pregledi jednog akcelerometra - senzora za mjerenje relativnog ubrzanja - te jednog senzora glasnoće.
+	Ipak, prije toga, radi lakšeg razumijevanja slijedi vrlo kratki opis dva ranije spomenuta niskorazinska komunikacijska protokola.
 
 	\subsection{Komunikacijski protokoli}
 	\paragraph{\underline{I$^2$C}} % (fold)
@@ -193,7 +193,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 			\label{fig:lis3dh}
 		\end{figure}
 
-		\par Ako se koristi I$^2$C, onda CS (\textit{Chip Select}) mora biti ili otpojen ili pritegnut na visoku naponsku razinu. U protivnom, ako se koristi SPI, onda CS mora biti pritegnut na masu.
+		\par Ako se koristi I$^2$C, onda CS (engl. \textit{Chip Select}) mora biti ili odspojen ili pritegnut na visoku naponsku razinu. U protivnom, ako se koristi SPI, onda CS mora biti pritegnut na masu.
 
 		\par Sklop ima dvije moguće I$^2$C adrese - 0x18 i 0x19, tako da je moguće spojiti dva ovakva senzora na isti \textit{master}. Adresa se određuje tako da se pin SDO ostavi "u zraku" ili pritegne na nisku razinu za 0x18, odnosno na visoku razinu za 0x19. \\
 		RPi3 u svojim GPIO pinovima ima dva para I$^2$C pinova - I$^2$C0 i I$^2$C1. Svejedno je koji se koristi, samo je, naravno, ključno da se parovi ne pomiješaju - SDA0 mora biti uparen s SCL0, a ne s SCL1, i obrnuto. Primjer I$^2$C spajanja prikazan je na Slici \ref{fig:lis3dhRpi} lijevo.
@@ -383,9 +383,9 @@ Tijekom pisanja ovog rada bio je dostupan samo akcelerometar LIS3DH, a budući d
 
 \newpage
 \section{Zaključak}
-	Cilj ovog rada bio je izložiti kratak opis računala Raspberry Pi, te demonstrirati široke mogućnosti njegovog korištenja s različitim senzorima. Iz svega navedenog, može se zaključiti da je RPi3 jedan iznimno fleksibilan sklop, koji je interesantan mnogim entuzijastima i stručnjacima - poglavito zbog ogromnog spektra mogućnosti koje nudi, kako u \textit{low-level} ugradbenoj, tako i u IoT (\textit{Internet of Things}, koncepcija spajanja ugradbenog sklopovlja na internet) domeni. Računalo je kao takvo vrlo popularno u raznim kućnim projektima, poput automatizacije nekih zadataka ili praćenja kontinuiranih prilika (poput, primjerice, temperature, buke ili kretanja), a vrlo je iskoristiv i u multimedijske svrhe. \\
+	Cilj ovog rada bio je izložiti kratak opis računala Raspberry Pi, te demonstrirati široke mogućnosti njegovog korištenja s različitim senzorima. Iz svega navedenog, može se zaključiti da je RPi3 jedan iznimno fleksibilan sklop, koji je interesantan mnogim entuzijastima i stručnjacima - poglavito zbog ogromnog spektra mogućnosti koje nudi, kako u niskoj, ugradbenoj, tako i u IoT (engl. \textit{Internet of Things}, koncepcija spajanja ugradbenog sklopovlja na internet) domeni. Računalo je kao takvo vrlo popularno u raznim kućnim projektima, poput automatizacije nekih zadataka ili praćenja kontinuiranih prilika (poput, primjerice, temperature, buke ili kretanja), a vrlo je iskoristiv i u multimedijske svrhe. \\
 
-	\par Ma koliko RPi bio moćan, ipak je i dalje riječ o ugradbenom računalu, pa je razumno očekivati da ima podršku za \textit{low-level} komunikaciju. Naravno, to je očekivanje ispunjeno - najpopularniji sklopovski komunikacijski protokoli (SPI, I$^2$C i TTL) su podržani i u potpunosti implementirani. Naravno, nije se stalo tu - implementirana je i podrška za USB i internetsku vezu, a od inačice 3 postoji i sasvim stabilna podrška za bežičnu vezu - konkretno, za \textit{WiFi} i \textit{Bluetooth} protokole. \\
+	\par Ma koliko RPi bio moćan, ipak je i dalje riječ o ugradbenom računalu, pa je razumno očekivati da ima podršku za komunikaciju na sklopovskoj razini. Naravno, to je očekivanje ispunjeno - najpopularniji sklopovski komunikacijski protokoli (SPI, I$^2$C i TTL) su podržani i u potpunosti implementirani. Naravno, nije se stalo tu - implementirana je i podrška za USB i internetsku vezu, a od inačice 3 postoji i sasvim stabilna podrška za bežičnu vezu - konkretno, za \textit{WiFi} i \textit{Bluetooth} protokole. \\
 
 	\par Uz RPi, izloženi su i jedan akcelerometar (LIS3DH) i jedan mikrofon (MAX4466), s posebnim osvrtom na njihovu komunikaciju s RPi-jem. Riječ je o interesantnim sklopovima koji pružaju mnogo mogućnosti, a iznimno ih je jednostavno "upregnuti" uz RPi. \\
 

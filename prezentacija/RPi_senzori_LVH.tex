@@ -174,26 +174,8 @@ Doc. dr. sc. Boris Milašinović}
 	\end{columns}
 \end{frame}
 
-\section{Dostupni programski okviri}
-\begin{frame}
-	\frametitle{Dostupni programski okviri}
-	GPIO komunikacija u Pythonu:
-	\begin{itemize}
-		\item Adafruitova biblioteka
-	\end{itemize}
 
-	Komunikacija GPIO i LIS3DH:
-	\begin{itemize}
-		\item Neslužbena biblioteka \texttt{python-lis3dh}
-	\end{itemize}
-
-	Komunikacija GPIO i MAX4466:
-	\begin{itemize}
-		\item Analogni izlazi $\longrightarrow$ ADC $\longrightarrow$ GPIO čitanje ADC izlaz
-	\end{itemize}
-\end{frame}
-
-\subsection{Primjer mjerenja}
+\section{Primjer mjerenja}
 \begin{frame}
 	\frametitle{Opis mjerenja}
 	Korišten LIS3DH \\
@@ -209,6 +191,56 @@ Doc. dr. sc. Boris Milašinović}
 			\item Odsviran ton A (55Hz)
 		\end{itemize}
 	\end{enumerate}
+	Programska podrška: Python
+\end{frame}
+
+\begin{frame}
+	\frametitle{Opis mjerenja}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\linewidth]{slike/lisRpiI2C.png}
+	\end{figure}
+\end{frame}
+
+\subsection{Kucanje}
+\begin{frame}
+	\frametitle{Primjer mjerenja - kucanje}
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\linewidth]{slike/click.png}
+	\end{figure}
+
+\end{frame}
+
+\subsection{Udaranje}
+\begin{frame}
+	\frametitle{Primjer mjerenja - udaranje}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\linewidth]{slike/aggro.png}
+	\end{figure}
+\end{frame}
+
+\subsection{Prigušeno titranje}
+\begin{frame}
+	\frametitle{Primjer mjerenja - prigušeno titranje}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\linewidth]{slike/bass3.png}
+	\end{figure}
+\end{frame}
+
+
+\section{Zaključak}
+\begin{frame}
+	\frametitle{Zaključak}
+	Raspberry Pi
+	\begin{itemize}
+		\item Vrlo fleksibilno računalo
+		\item Velika jednostavnost korištenja
+		\item Pogodan za ugradbene i edukacijske primjene
+	\end{itemize}
 \end{frame}
 
 \end{document}

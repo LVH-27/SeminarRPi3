@@ -26,11 +26,29 @@
 \headcommand {\beamer@subsectionentry {0}{2}{2}{8}{Mikrofon - Adafruit MAX4466}}\headcommand {\beamer@subsectionpages {7}{7}}
 \headcommand {\slideentry {2}{2}{1}{8/8}{Mikrofon - Adafruit MAX4466}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\beamer@subsectionentry {0}{2}{3}{9}{Dostupni programski okviri}}\headcommand {\beamer@subsectionpages {8}{8}}
-\headcommand {\slideentry {2}{3}{1}{9/9}{Dostupni programski okviri}{0}}
+\headcommand {\sectionentry {3}{Primjer mjerenja}{9}{Primjer mjerenja}{0}}
+\headcommand {\beamer@sectionpages {7}{8}}
+\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\slideentry {3}{0}{1}{9/9}{}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\beamer@partpages {1}{9}}
-\headcommand {\beamer@subsectionpages {9}{9}}
-\headcommand {\beamer@sectionpages {7}{9}}
-\headcommand {\beamer@documentpages {9}}
-\headcommand {\def \inserttotalframenumber {9}}
+\headcommand {\slideentry {3}{0}{2}{10/10}{}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{11}{Kucanje}}\headcommand {\beamer@subsectionpages {9}{10}}
+\headcommand {\slideentry {3}{1}{1}{11/11}{Kucanje}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{12}{Udaranje}}\headcommand {\beamer@subsectionpages {11}{11}}
+\headcommand {\slideentry {3}{2}{1}{12/12}{Udaranje}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{13}{Prigu\IeC {\v s}eno titranje}}\headcommand {\beamer@subsectionpages {12}{12}}
+\headcommand {\slideentry {3}{3}{1}{13/13}{Prigu\IeC {\v s}eno titranje}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\sectionentry {4}{Zaklju\IeC {\v c}ak}{14}{Zaklju\IeC {\v c}ak}{0}}
+\headcommand {\beamer@sectionpages {9}{13}}
+\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\slideentry {4}{0}{1}{14/14}{}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\beamer@partpages {1}{14}}
+\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\beamer@sectionpages {14}{14}}
+\headcommand {\beamer@documentpages {14}}
+\headcommand {\def \inserttotalframenumber {14}}
