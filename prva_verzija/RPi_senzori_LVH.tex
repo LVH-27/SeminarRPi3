@@ -89,7 +89,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 
 		\par Taj je SoC spregnut s \textbf{radnom memorijom} s druge strane tiskane pločice. Riječ je o LPDDR2 SDRAM memoriji, s kapacitetom od 1 GB.
 
-		\par Za bežičnu je komunikaciju zadužen procesor osnovnog pojasa (engl. \textit{baseband processor}) BCM43438, također od tvrtke Broadcom, koji podržava WiFi i Bluetooth 4.1 protokole. Smješten je na stražnjoj strani pločice, a spregnut je s antenom na prednjoj strani. Nije zgorega napomenuti da je Raspberry Pi 3 prva inačica ovog računala koja ima ugrađeno sklopovlje za bežičnu komunikaciju.
+		\par Za bežičnu je komunikaciju zadužen procesor osnovnog pojasa (engl. \textit{baseband processor}) BCM43438, također od tvrtke Broadcom, koji podržava WiFi i Bluetooth 4.1 protokole. Smješten je na stražnjoj strani pločice, a spregnut je s antenom na prednjoj strani. Vrijedi istaknuti da je Raspberry Pi 3 prva inačica ovog računala koja ima ugrađeno sklopovlje za bežičnu komunikaciju.
 
 		\par Konačno, SMSC LAN9514 (na slici uokviren plavom bojom) vrši funkciju USB čvora i Ethernet upravljača. Povezan je s procesorom jednom USB vezom, pa sa svakim od četiri USB priključka, te s Ethernet priključkom procesor komunicira preko te USB veze.
 		% paragraph glavni_cipovi (end)
@@ -313,7 +313,7 @@ Tijekom pisanja ovog rada bio je dostupan samo akcelerometar LIS3DH, a budući d
 	% paragraph plotting (end)
 
 
-	Nije zgorega napomenuti da je bilo potrebno malo modificirati postojeći programski kôd kako bi proradio, jer je Adafruit repozitorij promijenjen od zadnje verzije \texttt{python-lis3dh} biblioteke. Promjene se odnose na datoteku \texttt{LIS3DH.py} iz biblioteke \texttt{python-lis3dh}:
+	Nužno je napomenuti da je bilo potrebno malo modificirati postojeći programski kôd kako bi proradio, jer je Adafruit repozitorij promijenjen od zadnje verzije \texttt{python-lis3dh} biblioteke. Promjene se odnose na datoteku \texttt{LIS3DH.py} iz biblioteke \texttt{python-lis3dh}:
 		\begin{itemize}
 			\item Linija koja se odnosi na učitavanje I$^2$C podrške više nije 
 			\texttt{from Adafruit\_I2C import Adafruit\_I2C} jer je \texttt{Adafruit\_I2C} verzija te biblioteke koja se više ne koristi. Sada je uputno koristiti biblioteku \texttt{Adafruit\_GPIO.I2C}, pa taj \textit{import} izgleda ovako:
