@@ -1,0 +1,14 @@
+[0] Config.pm:340> INFO - This is Biber 2.4
+[0] Config.pm:343> INFO - Logfile is 'RPi_senzori_LVH.blg'
+[33] biber:287> INFO - === Čet Svi 11, 2017, 10:53:27
+[112] Biber.pm:348> INFO - Reading 'RPi_senzori_LVH.bcf'
+[236] Biber.pm:742> INFO - Found 3 citekeys in bib section 0
+[241] Biber.pm:3151> INFO - Processing section 0
+[268] Biber.pm:3308> INFO - Looking for bibtex format file 'RPi_senzori_LVH.bib' for section 0
+[272] bibtex.pm:1113> INFO - Decoding LaTeX character macros into UTF-8
+[274] bibtex.pm:974> INFO - Found BibTeX data source 'RPi_senzori_LVH.bib'
+[323] UCollate.pm:65> INFO - Overriding locale 'hr-HR' defaults 'variable = shifted' with 'variable = non-ignorable'
+[323] UCollate.pm:65> INFO - Overriding locale 'hr-HR' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[323] Biber.pm:3028> INFO - Sorting list 'ynt/global' of type 'entry' with scheme 'ynt' and locale 'hr-HR'
+[326] bbl.pm:519> INFO - Writing 'RPi_senzori_LVH.bbl' with encoding 'UTF-8'
+[333] bbl.pm:615> INFO - Output to RPi_senzori_LVH.bbl

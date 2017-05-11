@@ -43,7 +43,16 @@
 \usepackage{graphicx}
 
 \usepackage[margin=2cm]{geometry}
-\usepackage[colorlinks=true,urlcolor=black]{hyperref}
+\usepackage[colorlinks=true,allcolors=black]{hyperref}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+\addbibresource{RPi_senzori_LVH.bib}
+
+
 \pagenumbering{arabic}
 
 
@@ -73,7 +82,7 @@ Raspberry Pi je serija malih računala koje razvija zaklada Raspberry Pi Foundat
 U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry Pi Zero. U nastavku rada bit će riječi o Raspberry Pi 3 inačici, koja se vidi na Slici \ref{fig:rpi3}, a bit će oslovljena kao "RPi3".
 \begin{figure}[h!]
   \includegraphics[width=\linewidth]{slike/rpi3_color.png}
-  \caption{Raspberry Pi 3B.}
+  \caption{Raspberry Pi 3B. \cite{rpiwebsite}}
   \label{fig:rpi3}
 \end{figure}
 
@@ -189,7 +198,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 
 		\begin{figure}[h!]
 			\includegraphics[width=\linewidth]{slike/lis3dh.jpg}
-			\caption{Akcelerometar LIS3DH.}
+			\caption{Akcelerometar LIS3DH.\cite{lis3dh}}
 			\label{fig:lis3dh}
 		\end{figure}
 
@@ -225,7 +234,7 @@ U trenutku pisanja su dostupni Raspberry Pi 1, 2 i 3, te minijaturni Raspberry P
 
 		\begin{figure}[h!]
 			\includegraphics[width=\linewidth]{slike/4466.jpg}
-			\caption{Adafruit MAX4466.}
+			\caption{Adafruit MAX4466.\cite{max4466}}
 			\label{fig:max4466}
 		\end{figure}
 
@@ -397,11 +406,13 @@ Tijekom pisanja ovog rada bio je dostupan samo akcelerometar LIS3DH, a budući d
 \newpage
 \section{Literatura}
 
-\begin{itemize}
-	\item Raspberry Pi službene stranice: \url{https://www.raspberrypi.org/}
-	\item LIS3DH: \url{https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout/downloads?view=all}
-	\item MAX4466: \url{https://www.adafruit.com/product/1063}
-	\item Korištenje I$^2$C sučelja kroz Python: \url{http://www.instructables.com/id/Raspberry-Pi-I2C-Python/}
-\end{itemize}
+% \begin{itemize}
+% 	\item Raspberry Pi službene stranice: \url{https://www.raspberrypi.org/}
+% 	\item LIS3DH: \url{https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout/downloads?view=all}
+% 	\item MAX4466: \url{https://www.adafruit.com/product/1063}
+% 	\item Korištenje I$^2$C sučelja kroz Python: \url{http://www.instructables.com/id/Raspberry-Pi-I2C-Python/}
+% \end{itemize}
+
+\printbibliography
 
 \end{document}

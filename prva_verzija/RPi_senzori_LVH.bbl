@@ -1,0 +1,82 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{ynt/global}
+    \entry{rpiwebsite}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c4ca4238a0b923820dcc509a6f75849b}{%
+           family={1},
+           family_i={1\bibinitperiod}}}%
+      }
+      \strng{namehash}{c4ca4238a0b923820dcc509a6f75849b}
+      \strng{fullhash}{c4ca4238a0b923820dcc509a6f75849b}
+      \field{labelalpha}{1}
+      \field{sortinit}{9}
+      \field{sortinithash}{5a7694b2c36c7534b22948c31e4b7920}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Raspberry Pi sluzbene stranice}
+      \verb{url}
+      \verb https://www.raspberrypi.org/
+      \endverb
+      \keyw{rpi,raspberry,pi}
+    \endentry
+    \entry{lis3dh}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c81e728d9d4c2f636f067f89cc14862c}{%
+           family={2},
+           family_i={2\bibinitperiod}}}%
+      }
+      \strng{namehash}{c81e728d9d4c2f636f067f89cc14862c}
+      \strng{fullhash}{c81e728d9d4c2f636f067f89cc14862c}
+      \field{labelalpha}{2}
+      \field{sortinit}{9}
+      \field{sortinithash}{5a7694b2c36c7534b22948c31e4b7920}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{LIS3DH vodič}
+      \verb{url}
+      \verb https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout/downloads?view=all
+      \endverb
+      \keyw{lis3dh,adafruit,akcelerometar}
+    \endentry
+    \entry{max4466}{online}{}
+      \name{author}{1}{}{%
+        {{hash=eccbc87e4b5ce2fe28308fd9f2a7baf3}{%
+           family={3},
+           family_i={3\bibinitperiod}}}%
+      }
+      \strng{namehash}{eccbc87e4b5ce2fe28308fd9f2a7baf3}
+      \strng{fullhash}{eccbc87e4b5ce2fe28308fd9f2a7baf3}
+      \field{labelalpha}{3}
+      \field{sortinit}{9}
+      \field{sortinithash}{5a7694b2c36c7534b22948c31e4b7920}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{MAX4466 vodič}
+      \verb{url}
+      \verb https://www.adafruit.com/product/1063
+      \endverb
+      \keyw{max4466,adafruit,mikrofon,elektret}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

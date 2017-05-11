@@ -5,6 +5,34 @@
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{Python}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\tiny,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
 %\usepackage[croatian]{babel}
 
 \date{}
@@ -55,7 +83,7 @@ Doc. dr. sc. Boris Milašinović}
 		\begin{figure}[h]
 			\begin{minipage}{\textwidth}
 				\centering
-				\includegraphics[width=\linewidth]{slike/rpi3_color.png}
+				\includegraphics[width=\linewidth]{slike/pinout.png}
 			\end{minipage}
 		\end{figure}
 		Broadcom BCM2837
@@ -102,17 +130,51 @@ Doc. dr. sc. Boris Milašinović}
 \subsection{Primjeri korištenja}
 \begin{frame}
 	\frametitle{Raspberry Pi - primjeri korištenja}
+	VPN i WiFi pristupna točka
+	\begin{itemize}
+		\item Ostvarivanje kućnog VPN-a
+		\item Stvaranje \textit{ad hoc} WiFi pristupne točke
+	\end{itemize}
 	Pametna brava
 	\begin{itemize}
 		\item Autorizacija pomoću lozinke, kartice, prepoznavanja lica...
 		\item Praćenje autoriziranih ulaza u prostor
 	\end{itemize}
 	\vfill
-	VPN i WiFi pristupna točka
+	Kućna sigurnost - protuprovalni sustav
 	\begin{itemize}
-		\item Ostvarivanje kućnog VPN-a
-		\item Stvaranje \textit{ad hoc} WiFi pristupne točke
+		\item Prepoznavanje pokušaja provale
+		\item Prepoznavanje načina provale
+		\item Uzbunjivanje
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Protuprovalni sustav - Wibelock}
+	\begin{columns}[T]
+	    \begin{column}{.5\textwidth}
+		\begin{figure}[h]
+			\begin{minipage}{\textwidth}
+				\centering
+				\includegraphics[width=\linewidth]{slike/wibelock.jpg}
+				\caption{Arhitektura sustava obavještavanja}
+			\end{minipage}
+		\end{figure}
+		
+		\end{column}
+
+		\begin{column}{.5\textwidth}
+			\begin{figure}[h]
+			\begin{minipage}{\textwidth}
+				\centering
+				\includegraphics[width=\linewidth]{slike/wibelock2.jpg}
+				\caption{Uzbunjivanje vlasnika}
+			\end{minipage}
+		\end{figure}	
+		\end{column}
+	\end{columns}
+	\vfill
+	Više: \url{https://angel.co/wibelock-1}
 \end{frame}
 
 \section{Senzori}
@@ -154,7 +216,7 @@ Doc. dr. sc. Boris Milašinović}
 		\begin{figure}[h]
 			\begin{minipage}{\textwidth}
 				\centering
-				\includegraphics[width=\linewidth]{slike/lis3dh.jpg}
+				\includegraphics[width=\linewidth]{slike/4466.jpg}
 			\end{minipage}
 		\end{figure}
 		Elektretski mikrofon tvrtke Adafruit
@@ -193,6 +255,14 @@ Doc. dr. sc. Boris Milašinović}
 	\end{enumerate}
 	Programska podrška: Python
 \end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Programski kôd}
+	Čitanje podataka u Pythonu:
+	\lstinputlisting[style=Python]{testLIS3DH.py}
+\end{frame}
+
 
 \begin{frame}
 	\frametitle{Opis mjerenja}

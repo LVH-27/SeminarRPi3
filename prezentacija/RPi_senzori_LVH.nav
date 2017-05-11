@@ -17,38 +17,42 @@
 \headcommand {\beamer@subsectionentry {0}{1}{3}{6}{Primjeri kori\IeC {\v s}tenja}}\headcommand {\beamer@subsectionpages {5}{5}}
 \headcommand {\slideentry {1}{3}{1}{6/6}{Primjeri kori\IeC {\v s}tenja}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\sectionentry {2}{Senzori}{7}{Senzori}{0}}
-\headcommand {\beamer@sectionpages {3}{6}}
-\headcommand {\beamer@subsectionpages {6}{6}}
-\headcommand {\beamer@subsectionentry {0}{2}{1}{7}{Akcelerometar - Adafruit LIS3DH}}\headcommand {\beamer@subsectionpages {7}{6}}
-\headcommand {\slideentry {2}{1}{1}{7/7}{Akcelerometar - Adafruit LIS3DH}{0}}
+\headcommand {\slideentry {1}{3}{2}{7/7}{Primjeri kori\IeC {\v s}tenja}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\beamer@subsectionentry {0}{2}{2}{8}{Mikrofon - Adafruit MAX4466}}\headcommand {\beamer@subsectionpages {7}{7}}
-\headcommand {\slideentry {2}{2}{1}{8/8}{Mikrofon - Adafruit MAX4466}{0}}
+\headcommand {\sectionentry {2}{Senzori}{8}{Senzori}{0}}
+\headcommand {\beamer@sectionpages {3}{7}}
+\headcommand {\beamer@subsectionpages {6}{7}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{8}{Akcelerometar - Adafruit LIS3DH}}\headcommand {\beamer@subsectionpages {8}{7}}
+\headcommand {\slideentry {2}{1}{1}{8/8}{Akcelerometar - Adafruit LIS3DH}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\sectionentry {3}{Primjer mjerenja}{9}{Primjer mjerenja}{0}}
-\headcommand {\beamer@sectionpages {7}{8}}
-\headcommand {\beamer@subsectionpages {8}{8}}
-\headcommand {\slideentry {3}{0}{1}{9/9}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{9}{Mikrofon - Adafruit MAX4466}}\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\slideentry {2}{2}{1}{9/9}{Mikrofon - Adafruit MAX4466}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\slideentry {3}{0}{2}{10/10}{}{0}}
+\headcommand {\sectionentry {3}{Primjer mjerenja}{10}{Primjer mjerenja}{0}}
+\headcommand {\beamer@sectionpages {8}{9}}
+\headcommand {\beamer@subsectionpages {9}{9}}
+\headcommand {\slideentry {3}{0}{1}{10/10}{}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{11}{Kucanje}}\headcommand {\beamer@subsectionpages {9}{10}}
-\headcommand {\slideentry {3}{1}{1}{11/11}{Kucanje}{0}}
+\headcommand {\slideentry {3}{0}{2}{11/11}{}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{12}{Udaranje}}\headcommand {\beamer@subsectionpages {11}{11}}
-\headcommand {\slideentry {3}{2}{1}{12/12}{Udaranje}{0}}
+\headcommand {\slideentry {3}{0}{3}{12/12}{}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{13}{Prigu\IeC {\v s}eno titranje}}\headcommand {\beamer@subsectionpages {12}{12}}
-\headcommand {\slideentry {3}{3}{1}{13/13}{Prigu\IeC {\v s}eno titranje}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{13}{Kucanje}}\headcommand {\beamer@subsectionpages {10}{12}}
+\headcommand {\slideentry {3}{1}{1}{13/13}{Kucanje}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\sectionentry {4}{Zaklju\IeC {\v c}ak}{14}{Zaklju\IeC {\v c}ak}{0}}
-\headcommand {\beamer@sectionpages {9}{13}}
-\headcommand {\beamer@subsectionpages {13}{13}}
-\headcommand {\slideentry {4}{0}{1}{14/14}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{14}{Udaranje}}\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\slideentry {3}{2}{1}{14/14}{Udaranje}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\beamer@partpages {1}{14}}
-\headcommand {\beamer@subsectionpages {14}{14}}
-\headcommand {\beamer@sectionpages {14}{14}}
-\headcommand {\beamer@documentpages {14}}
-\headcommand {\def \inserttotalframenumber {14}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{15}{Prigu\IeC {\v s}eno titranje}}\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\slideentry {3}{3}{1}{15/15}{Prigu\IeC {\v s}eno titranje}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\sectionentry {4}{Zaklju\IeC {\v c}ak}{16}{Zaklju\IeC {\v c}ak}{0}}
+\headcommand {\beamer@sectionpages {10}{15}}
+\headcommand {\beamer@subsectionpages {15}{15}}
+\headcommand {\slideentry {4}{0}{1}{16/16}{}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\beamer@partpages {1}{16}}
+\headcommand {\beamer@subsectionpages {16}{16}}
+\headcommand {\beamer@sectionpages {16}{16}}
+\headcommand {\beamer@documentpages {16}}
+\headcommand {\def \inserttotalframenumber {16}}
