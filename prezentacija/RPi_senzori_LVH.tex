@@ -39,8 +39,8 @@
 
 \hypersetup{draft}
 
-\title{Očitavanje senzorskih podataka korištenjem računala Raspberry Pi 3}
-\author{Leonard Volarić Horvat\\ Mentori: \\ Nenad Katanić, mag. ing.\\
+\title[]{Očitavanje senzorskih podataka korištenjem računala Raspberry Pi 3}
+\author[Leonard Volarić Horvat]{Leonard Volarić Horvat\\ Mentori: \\ Nenad Katanić, mag. ing.\\
 Doc. dr. sc. Boris Milašinović}
 
 \institute[FER]{Sveučilište u Zagrebu\\Fakultet elektrotehnike i računarstva}
@@ -257,13 +257,6 @@ Doc. dr. sc. Boris Milašinović}
 \end{frame}
 
 
-\begin{frame}[fragile]
-	\frametitle{Programski kôd}
-	Čitanje podataka u Pythonu:
-	\lstinputlisting[style=Python]{testLIS3DH.py}
-\end{frame}
-
-
 \begin{frame}
 	\frametitle{Opis mjerenja}
 	\begin{figure}[h]
@@ -271,6 +264,13 @@ Doc. dr. sc. Boris Milašinović}
 		\includegraphics[width=0.8\linewidth]{slike/lisRpiI2C.png}
 	\end{figure}
 \end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Programski kôd}
+	Čitanje podataka u Pythonu:
+	\lstinputlisting[style=Python]{testLIS3DH.py}
+\end{frame}
+
 
 \subsection{Kucanje}
 \begin{frame}
